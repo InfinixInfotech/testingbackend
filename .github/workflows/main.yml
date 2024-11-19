@@ -1,0 +1,42 @@
+name: CI/CD for .NET Backend
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Setup .NET SDK
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0' # Specify your .NET version
+
+    # Restore dependencies
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    # Build the application
+    - name: Build Application
+      run: dotnet build --no-restore --configuration Release
+
+    # Run tests
+    - name: Run Tests
+      run: dotnet test --no-build --verbosity normal
+
+    # Push changes to remote if necessary (GitHub Authentication)
+    - name: Push Changes
+      run: git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
