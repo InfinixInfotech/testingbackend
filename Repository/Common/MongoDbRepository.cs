@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Models.Demo;
+using Models.Login;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,6 @@ namespace Repository.Common
             _database = client.GetDatabase(configuration.GetSection("MongoDBSettings:DatabaseName").Value);
         }
         public IMongoCollection<Demos> Demos => _database.GetCollection<Demos>("Demos");
+        public IMongoCollection<User> Users => _database.GetCollection<User>("User");
     }
 }
