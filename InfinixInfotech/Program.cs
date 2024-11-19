@@ -15,7 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
 builder.Services.AddScoped<JwtAcessToken>();
-builder.Services.AddScoped<SequenceGenerator>();
 
 // Configure MongoDB settings
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
@@ -56,7 +55,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("user", policy => policy.RequireRole("user"));
 });
 
-// Configure distributed cache (Memory)          
+// Configure distributed cache (Memory)
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 
