@@ -4,6 +4,8 @@ using Services.Common.Class;
 using Services.Common.IClass;
 using Services.Demo.Class;
 using Services.Demo.IClass;
+using Services.Login.Class;
+using Services.Login.IClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace Services
            services.AddScoped<Security>();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IDemoService, DemoService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }
