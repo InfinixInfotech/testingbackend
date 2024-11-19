@@ -8,11 +8,13 @@ using System.Text;
 using Services.Common.IClass;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Common;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure custom services
 CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
+builder.Services.AddScoped<JwtAcessToken>();
 
 // Configure MongoDB settings
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));

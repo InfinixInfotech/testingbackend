@@ -7,19 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CRM\Logins\**" />
+    <Content Remove="CRM\Logins\**" />
+    <EmbeddedResource Remove="CRM\Logins\**" />
+    <None Remove="CRM\Logins\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CRM\Logins\" />
   </ItemGroup>
 
 </Project>

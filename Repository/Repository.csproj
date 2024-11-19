@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Class\" />
-    <Folder Include="Common\IClass\" />
+    <Compile Remove="Common\Class\**" />
+    <Compile Remove="Common\IClass\**" />
+    <EmbeddedResource Remove="Common\Class\**" />
+    <EmbeddedResource Remove="Common\IClass\**" />
+    <None Remove="Common\Class\**" />
+    <None Remove="Common\IClass\**" />
   </ItemGroup>
 
   <ItemGroup>
