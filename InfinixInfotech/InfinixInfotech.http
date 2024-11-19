@@ -1,0 +1,6 @@
+@InfinixInfotech_HostAddress = http://localhost:5118
+
+GET {{InfinixInfotech_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

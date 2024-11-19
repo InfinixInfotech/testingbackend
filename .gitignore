@@ -1,0 +1,32 @@
+# Ignore Visual Studio files and folders
+.vs/
+*.user
+*.suo
+
+# Ignore build results
+bin/
+obj/
+debug/
+release/
+TestResults/
+
+# Ignore IDE settings
+.idea/
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore environment configuration files
+*.env
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
