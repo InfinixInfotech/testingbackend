@@ -35,8 +35,4 @@ jobs:
     - name: Run Tests
       run: dotnet test --no-build --verbosity normal
 
-    # Push changes to remote if necessary (GitHub Authentication)
-    - name: Push Changes
-      run: git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    
