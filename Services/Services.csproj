@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Settings\Class\" />
+    <Folder Include="Settings\IClass\" />
+  </ItemGroup>
+
 </Project>

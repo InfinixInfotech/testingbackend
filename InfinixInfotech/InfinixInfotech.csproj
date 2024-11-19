@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="CRM\Logins\**" />
+    <Compile Remove="CRM\Setting\**" />
     <Content Remove="CRM\Logins\**" />
+    <Content Remove="CRM\Setting\**" />
     <EmbeddedResource Remove="CRM\Logins\**" />
+    <EmbeddedResource Remove="CRM\Setting\**" />
     <None Remove="CRM\Logins\**" />
+    <None Remove="CRM\Setting\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +28,10 @@
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CRM\Settings\" />
   </ItemGroup>
 
 </Project>
