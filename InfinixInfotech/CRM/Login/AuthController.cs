@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Login;
 using Services.Login.IClass;
@@ -17,6 +18,7 @@ namespace InfinixInfotech.CRM.Login
 
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginData loginData)
         {
             var response = await _authService.LoginAsync(loginData);

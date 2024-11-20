@@ -6,6 +6,8 @@ using Services.Demo.Class;
 using Services.Demo.IClass;
 using Services.Login.Class;
 using Services.Login.IClass;
+using Services.Settings.Class;
+using Services.Settings.IClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,11 @@ namespace Services
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IDemoService, DemoService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IGroupsService, GroupsService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IQualificationService, QualificationService>();
+            services.AddScoped<ISegmentService, SegmentService>();
+            services.AddScoped<ISegmentPlanService, SegmentPlanService>();
         }
     }
 }

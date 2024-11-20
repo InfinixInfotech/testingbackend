@@ -2,14 +2,10 @@
 using Repository.Common;
 using Repository.Demo.Class;
 using Repository.Demo.IClass;
-using Repository.Login;
 using Repository.Login.Class;
 using Repository.Login.IClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Repository.Settings.Class;
+using Repository.Settings.IClass;
 
 namespace Repository
 {
@@ -20,6 +16,13 @@ namespace Repository
             services.AddScoped<MongoDbRepository>();
             services.AddScoped<IDemoRepository, DemoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGroupsRepository, GroupsRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IQualificationRepository, QualificationRepository>();
+            services.AddScoped<ISegmentRepository, SegmentRepository>();
+            services.AddScoped<ISegmentPlanRepository, SegmentPlanRepository>();
+
         }
 
     }

@@ -35,7 +35,7 @@ namespace Services.Login.Class
                     Message = "Invalid username or password."
                 };
             }
-            var token = await _jwtAcesstoken.GenerateJWT(user.UserName);
+            var token = await _jwtAcesstoken.GenerateJWT("admin");
 
             return new AuthResponse
             {

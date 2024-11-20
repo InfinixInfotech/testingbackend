@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Models.Common;
 using Models.Demo;
 using Models.Login;
+using Models.Settings;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -22,5 +24,11 @@ namespace Repository.Common
         }
         public IMongoCollection<Demos> Demos => _database.GetCollection<Demos>("Demos");
         public IMongoCollection<User> Users => _database.GetCollection<User>("User");
+        public IMongoCollection<Groups> Groups => _database.GetCollection<Groups>("Groups");
+        public IMongoCollection<BlacklistedToken> BlacklistedToken => _database.GetCollection<BlacklistedToken>("BlacklistedToken");
+        public IMongoCollection<Department> Department => _database.GetCollection<Department>("Department");
+        public IMongoCollection<Qualification> Qualification => _database.GetCollection<Qualification>("Qualification");
+        public IMongoCollection<Segment> Segment => _database.GetCollection<Segment>("Segment");
+        public IMongoCollection<SegmentPlan> SegmentPlan => _database.GetCollection<SegmentPlan>("SegmentPlan");
     }
 }

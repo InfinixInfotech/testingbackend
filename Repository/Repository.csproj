@@ -25,9 +25,4 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Settings\Class\" />
-    <Folder Include="Settings\IClass\" />
-  </ItemGroup>
-
 </Project>

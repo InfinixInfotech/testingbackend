@@ -31,25 +31,23 @@ namespace Common
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim(ClaimTypes.Role, role),
-        new Claim(JwtRegisteredClaimNames.Iat, ((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds()).ToString(), ClaimValueTypes.Integer64)
-    };
-
+            {
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, role),
+                new Claim(JwtRegisteredClaimNames.Iat,
+                          ((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds()).ToString(),
+                          ClaimValueTypes.Integer64)
+            };
 
             if (role == "admin")
             {
                 claims.Add(new Claim("IsAdmin", "true"));
             }
-            else if (role == "user")
-            {
-            }
 
             var token = new JwtSecurityToken(
-                _issuer,
-                _audience,
-                claims,
+                issuer: _issuer,
+                audience: _audience,
+                claims: claims,
                 expires: DateTime.UtcNow.AddYears(_expiryYear),
                 signingCredentials: credentials);
 
