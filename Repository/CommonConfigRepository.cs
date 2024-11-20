@@ -22,6 +22,8 @@ namespace Repository
             services.AddScoped<IQualificationRepository, QualificationRepository>();
             services.AddScoped<ISegmentRepository, SegmentRepository>();
             services.AddScoped<ISegmentPlanRepository, SegmentPlanRepository>();
+            services.AddScoped<ILeadSourceRepository, LeadSourceRepository>();
+            services.AddScoped<ILeadStatusRepository, LeadStatusRepository>();
 
         }
 

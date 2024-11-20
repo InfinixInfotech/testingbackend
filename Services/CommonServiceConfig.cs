@@ -29,6 +29,8 @@ namespace Services
             services.AddScoped<IQualificationService, QualificationService>();
             services.AddScoped<ISegmentService, SegmentService>();
             services.AddScoped<ISegmentPlanService, SegmentPlanService>();
+            services.AddScoped<ILeadSourceService, LeadSourceService>();
+            services.AddScoped<ILeadStatusService, LeadStatusService>();
         }
     }
 }

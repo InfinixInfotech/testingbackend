@@ -30,5 +30,7 @@ namespace Repository.Common
         public IMongoCollection<Qualification> Qualification => _database.GetCollection<Qualification>("Qualification");
         public IMongoCollection<Segment> Segment => _database.GetCollection<Segment>("Segment");
         public IMongoCollection<SegmentPlan> SegmentPlan => _database.GetCollection<SegmentPlan>("SegmentPlan");
+        public IMongoCollection<LeadSource> LeadSource => _database.GetCollection<LeadSource>("LeadSource");
+        public IMongoCollection<LeadStatus> LeadStatus => _database.GetCollection<LeadStatus>("LeadStatus");
     }
 }
