@@ -1,0 +1,1 @@
+This repository contains the backend API developed using the .NET framework. The application serves as the backend for a web application, handling business logic, database interactions, and API endpoints.
