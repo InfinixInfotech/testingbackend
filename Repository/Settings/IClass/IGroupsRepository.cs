@@ -10,8 +10,9 @@ namespace Repository.Settings.IClass
     public interface IGroupsRepository
     {
         Task InsertAsync(Groups model);
-        Task UpdateByIdAsync(int id, Groups model);
+        Task UpdateByIdAsync(Groups model);
         Task DeleteByIdAsync(int id);
         Task<List<Groups>> GetAllAsync();
+        Task<Groups> GetGroupsById(int id);
     }
 }

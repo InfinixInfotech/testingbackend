@@ -34,11 +34,11 @@ namespace Services.Settings.Class
             }
         }
 
-        public async Task<Response> UpdateByIdAsync(int id, Groups model)
+        public async Task<Response> UpdateByIdAsync(Groups model)
         {
             try
             {
-                await _groupsRepository.UpdateByIdAsync(id, model);
+                await _groupsRepository.UpdateByIdAsync(model);
                 return new Response { Success = true, Message = "Add Group updated successfully" };
             }
             catch (Exception ex)
@@ -66,6 +66,22 @@ namespace Services.Settings.Class
             {
                 var data = await _groupsRepository.GetAllAsync();
                 return new Response { Success = true, Data = data };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
+        public async Task<Response> GetGroupsById(int id)
+        {
+            try
+            {
+                var user = await _groupsRepository.GetGroupsById(id);
+                if (user == null)
+                {
+                    return new Response { Success = false, Error = "groups not found." };
+                }
+                return new Response { Success = true, Data = user };
             }
             catch (Exception ex)
             {

@@ -96,5 +96,21 @@ namespace Services.Settings.Class
                 Error = null
             };
         }
+        public async Task<Response> GetLeadSourceById(int id)
+        {
+            try
+            {
+                var user = await _repository.GetByIdAsync(id);
+                if (user == null)
+                {
+                    return new Response { Success = false, Error = "Lead Source not found." };
+                }
+                return new Response { Success = true, Data = user };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
     }
 }

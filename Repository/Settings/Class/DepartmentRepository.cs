@@ -41,5 +41,6 @@ namespace Repository.Settings.Class
         {
             await _collection.DeleteOneAsync(d => d.Id == id);
         }
+        
     }
 }

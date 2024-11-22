@@ -95,9 +95,23 @@ namespace Services.Settings.Class
                 Success = true,
                 Message = "LeadStatus deleted successfully",
                 Error = null
-            };
-
-
+            };        
+        }
+        public async Task<Response> GetLeadStatusById(int id)
+        {
+            try
+            {
+                var user = await _leadStatusRepository.GetByIdAsync(id);
+                if (user == null)
+                {
+                    return new Response { Success = false, Error = "Lead Status not found." };
+                }
+                return new Response { Success = true, Data = user };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
         }
     }
 }

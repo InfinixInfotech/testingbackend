@@ -14,5 +14,6 @@ namespace Services.Settings.IClass
         Task<Response> UpdateSegmentByIdAsync(int id, Segment segment);
         Task<Response> DeleteSegmentByIdAsync(int id);
         Task<Response> GetAllSegmentAsync();
+        Task<Response> GetSegmentById(int id);
     }
 }

@@ -72,5 +72,21 @@ namespace Services.Settings.Class
                 return new Response { Success = false, Error = ex.Message };
             }
         }
+        public async Task<Response> GetQualificationById(int id)
+        {
+            try
+            {
+                var user = await _qualificationRepository.GetQualificationById(id);
+                if (user == null)
+                {
+                    return new Response { Success = false, Error = "Qualification not found." };
+                }
+                return new Response { Success = true, Data = user };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
     }
 }

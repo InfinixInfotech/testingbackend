@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Settings;
+using Services.Settings.Class;
 using Services.Settings.IClass;
 
 namespace InfinixInfotech.CRM.Settings
@@ -27,9 +28,9 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateByIdGroups")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateByIdGroups(int id, [FromBody] Groups model)
+        public async Task<IActionResult> UpdateByIdGroups([FromBody] Groups model)
         {
-            var response = await _groupsService.UpdateByIdAsync(id, model);
+            var response = await _groupsService.UpdateByIdAsync(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
 
@@ -48,6 +49,14 @@ namespace InfinixInfotech.CRM.Settings
         public async Task<IActionResult> GetAllGroups()
         {
             var response = await _groupsService.GetAllAsync();
+            return StatusCode(response.Success ? 200 : 500, response);
+        }
+        [HttpGet]
+        [Route("GetGroupsById")]
+        [Authorize(Policy = "admin")]
+        public async Task<IActionResult> GetGroupsById(int id)
+        {
+            var response = await _groupsService.GetGroupsById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

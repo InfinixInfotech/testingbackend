@@ -23,9 +23,9 @@ namespace Repository.Settings.Class
             await _admincollection.InsertOneAsync(model);
         }
 
-        public async Task UpdateByIdAsync(int id, Groups model)
+        public async Task UpdateByIdAsync(Groups model)
         {
-            var filter = Builders<Groups>.Filter.Eq("_id", id);
+            var filter = Builders<Groups>.Filter.Eq("_id", model.Id);
             await _admincollection.ReplaceOneAsync(filter, model);
         }
 
@@ -38,6 +38,10 @@ namespace Repository.Settings.Class
         public async Task<List<Groups>> GetAllAsync()
         {
             return await _admincollection.Find(_ => true).ToListAsync();
+        }
+        public async Task<Groups> GetGroupsById(int id)
+        {
+            return await _admincollection.Find(user => user.Id == id).FirstOrDefaultAsync();
         }
     }
 }

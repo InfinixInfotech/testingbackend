@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Settings;
+using Services.Settings.Class;
 using Services.Settings.IClass;
 
 namespace InfinixInfotech.CRM.Settings
@@ -50,6 +51,14 @@ namespace InfinixInfotech.CRM.Settings
         {
             var response = await _leadSource.DeleteAsync(id);
             return response.Success ? Ok(response) : BadRequest(response);
+        }
+        [HttpGet]
+        [Route("GetLeadSourceById")]
+        [Authorize(Policy = ("admin"))]
+        public async Task<IActionResult> GetLeadSourceById(int id)
+        {
+            var response = await _leadSource.GetLeadSourceById(id);
+            return StatusCode(response.Success ? 200 : 500, response);
         }
     }
 }

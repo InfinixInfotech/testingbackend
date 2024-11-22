@@ -13,5 +13,6 @@ namespace Repository.Settings.IClass
         Task UpdateSegmentByIdAsync(int id, Segment entity);
         Task DeleteSegmentByIdAsync(int id);
         Task<List<Segment>> GetAllSegmentAsync();
+        Task<Segment> GetSegmentById(int id);
     }
 }

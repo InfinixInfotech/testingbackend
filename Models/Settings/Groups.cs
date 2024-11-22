@@ -12,7 +12,7 @@ namespace Models.Settings
         public int Id { get; set; }
         public string GroupName { get; set; }
         public Dashboard Dashboard { get; set; }
-        public Leads Leads { get; set; }
+        public Leadss Leads { get; set; }
         public Contact Contact { get; set; }
         public MutualFund MutualFund { get; set; }
         public FreeTrial FreeTrial { get; set; }
@@ -45,7 +45,7 @@ public class Dashboard
     public bool CallingDashboard { get; set; }
 }
 
-public class Leads
+public class Leadss
 {
     public bool Create { get; set; }
     public bool View { get; set; }

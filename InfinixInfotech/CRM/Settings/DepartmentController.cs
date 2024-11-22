@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Settings;
+using Services.Settings.Class;
 using Services.Settings.IClass;
 
 namespace InfinixInfotech.CRM.Settings
@@ -65,6 +66,14 @@ namespace InfinixInfotech.CRM.Settings
                 return Ok(response);
             }
             return BadRequest(response);
+        }
+        [HttpGet]
+        [Route("GetDepartmentById")]
+        [Authorize(Policy = "admin")]
+        public async Task<IActionResult> GetDepartmentById(int id)
+        {
+            var response = await _departmentService.GetDepartmentById(id);
+            return StatusCode(response.Success ? 200 : 500, response);
         }
     }
 }

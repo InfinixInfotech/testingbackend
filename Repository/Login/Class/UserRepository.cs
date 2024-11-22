@@ -16,7 +16,7 @@ namespace Repository.Login.Class
 
         public UserRepository(MongoDbRepository context)
         {
-            _admincollection = context.Users;
+            _admincollection = context.User;
         }
         public async Task<User> GetUserByUserNameAsync(string userName)
         {

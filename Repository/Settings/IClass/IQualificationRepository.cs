@@ -13,5 +13,6 @@ namespace Repository.Settings.IClass
         Task UpdateQualificationByIdAsync(int id, Qualification qualification);
         Task DeleteQualificationByIdAsync(int id);
         Task<List<Qualification>> GetAllQualificationAsync();
+        Task<Qualification> GetQualificationById(int id);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Settings;
+using Services.Settings.Class;
 using Services.Settings.IClass;
 
 namespace InfinixInfotech.CRM.Settings
@@ -49,6 +50,14 @@ namespace InfinixInfotech.CRM.Settings
         {
             var response = await _service.GetAllQualificationAsync();
             return Ok(response);
+        }
+        [HttpGet]
+        [Route("GetQualificationById")]
+        [Authorize(Policy = "admin")]
+        public async Task<IActionResult> GetQualificationById(int id)
+        {
+            var response = await _service.GetQualificationById(id);
+            return StatusCode(response.Success ? 200 : 500, response);
         }
     }
 }

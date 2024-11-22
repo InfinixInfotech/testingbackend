@@ -14,5 +14,6 @@ namespace Services.Settings.IClass
         Task<Response> UpdateDepartmentAsync(int id, Department department);
         Task<Response> DeleteDepartmentAsync(int id);
         Task<Response> GetAllDepartmentAsync();
+        Task<Response> GetDepartmentById(int id);
     }
 }

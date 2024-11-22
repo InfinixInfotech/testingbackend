@@ -38,5 +38,9 @@ namespace Repository.Settings.Class
         {
             return await _collection.Find(_ => true).ToListAsync();
         }
+        public async Task<Segment> GetSegmentById(int id)
+        {
+            return await _collection.Find(user => user.Id == id).FirstOrDefaultAsync();
+        }
     }
 }

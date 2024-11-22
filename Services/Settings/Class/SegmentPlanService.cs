@@ -71,5 +71,21 @@ namespace Services.Settings.Class
                 return new Response { Success = false, Error = ex.Message };
             }
         }
+        public async Task<Response> GetSegmentById(int id)
+        {
+            try
+            {
+                var user = await _segmentPlanRepository.GetSegmentById(id);
+                if (user == null)
+                {
+                    return new Response { Success = false, Error = "Segment not found." };
+                }
+                return new Response { Success = true, Data = user };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
     }
 }

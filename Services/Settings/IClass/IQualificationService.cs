@@ -14,5 +14,6 @@ namespace Services.Settings.IClass
         Task<Response> UpdateQualificationByIdAsync(int id, Qualification qualification);
         Task<Response> DeleteQualificationByIdAsync(int id);
         Task<Response> GetAllQualificationAsync();
+        Task<Response> GetQualificationById(int id);
     }
 }

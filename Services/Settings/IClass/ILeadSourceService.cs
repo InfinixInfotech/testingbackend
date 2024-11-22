@@ -14,5 +14,6 @@ namespace Services.Settings.IClass
         Task<Response> InsertAsync(LeadSource leadSource);
         Task<Response> UpdateAsync(LeadSource leadSource);
         Task<Response> DeleteAsync(int id);
+        Task<Response> GetLeadSourceById(int id);
     }
 }

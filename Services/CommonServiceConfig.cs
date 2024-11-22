@@ -4,15 +4,14 @@ using Services.Common.Class;
 using Services.Common.IClass;
 using Services.Demo.Class;
 using Services.Demo.IClass;
+using Services.Leads.Class;
+using Services.Leads.IClass;
 using Services.Login.Class;
 using Services.Login.IClass;
+using Services.PR.Class;
+using Services.PR.IClass;
 using Services.Settings.Class;
 using Services.Settings.IClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -31,6 +30,9 @@ namespace Services
             services.AddScoped<ISegmentPlanService, SegmentPlanService>();
             services.AddScoped<ILeadSourceService, LeadSourceService>();
             services.AddScoped<ILeadStatusService, LeadStatusService>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ILeadService, LeadService>();
+            services.AddScoped<IPaymentRaiseService, PaymentRaiseService>();
         }
     }
 }

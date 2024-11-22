@@ -2,8 +2,12 @@
 using Repository.Common;
 using Repository.Demo.Class;
 using Repository.Demo.IClass;
+using Repository.Leads.Class;
+using Repository.Leads.IClass;
 using Repository.Login.Class;
 using Repository.Login.IClass;
+using Repository.PR.Class;
+using Repository.PR.IClass;
 using Repository.Settings.Class;
 using Repository.Settings.IClass;
 
@@ -24,6 +28,10 @@ namespace Repository
             services.AddScoped<ISegmentPlanRepository, SegmentPlanRepository>();
             services.AddScoped<ILeadSourceRepository, LeadSourceRepository>();
             services.AddScoped<ILeadStatusRepository, LeadStatusRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ILeadRepository, LeadRepository>();
+            services.AddScoped<IPaymentRaiseRepository, PaymentRaiseRepository>();
+            services.AddScoped<IIdentifierService, IdentifierService>();
 
         }
 
