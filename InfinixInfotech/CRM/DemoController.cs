@@ -23,7 +23,7 @@ namespace InfinixInfotech.CRM
         [HttpGet("GetData")]
         public IActionResult GetData()
         {
-            return Ok("Hello from indiannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+            return Ok("Hello from india");
         }
         [HttpGet("Encrypt")]
         
