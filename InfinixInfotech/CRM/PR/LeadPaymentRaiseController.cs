@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Leads;
 using Models.PR;
@@ -17,6 +18,8 @@ namespace InfinixInfotech.CRM.PR
         }
         [HttpPost]
         [Route("AddLeadPR")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> AddLeadPR([FromBody] PaymentRaise model)
         {
             var response = await _paymentRaise.LeadPR(model);
@@ -24,6 +27,8 @@ namespace InfinixInfotech.CRM.PR
         }
         [HttpGet]
         [Route("GetLeadPRById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetLeadPRById(int id)
         {
             var response = await _paymentRaise.GetLeadPRById(id);
@@ -31,6 +36,8 @@ namespace InfinixInfotech.CRM.PR
         }
         [HttpPut]
         [Route("UpdateLeadPRById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> UpdateLeadPRById([FromBody] PaymentRaise model)
         {
             var response = await _paymentRaise.UpdateLeadPRById(model);
@@ -38,6 +45,8 @@ namespace InfinixInfotech.CRM.PR
         }
         [HttpDelete]
         [Route("DeleteLeadPRById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> DeleteLeadPRById(int id)
         {
             var response = await _paymentRaise.DeleteLeadPRById(id);
@@ -45,6 +54,8 @@ namespace InfinixInfotech.CRM.PR
         }
         [HttpGet]
         [Route("GetAllLeadPR")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetAllLeadPR()
         {
             var response = await _paymentRaise.GetAllLeadPR();

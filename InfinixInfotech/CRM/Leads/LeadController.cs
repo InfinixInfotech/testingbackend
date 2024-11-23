@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Leads;
 using Models.Settings;
@@ -17,6 +18,8 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpPost]
         [Route("AddLead")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> AddLead([FromBody] Lead model)
         {
             var response = await _leadService.AddLead(model);
@@ -24,6 +27,8 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpGet]
         [Route("GetLeadById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetLeadById(int id)
         {
             var response = await _leadService.GetLeadById(id);
@@ -31,6 +36,8 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpPut]
         [Route("UpdateLeadById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> UpdateLeadById([FromBody] Lead model)
         {
             var response = await _leadService.UpdateLeadById(model);
@@ -38,6 +45,9 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpDelete]
         [Route("DeleteLeadById")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
+
         public async Task<IActionResult> DeleteLeadById(int id)
         {
             var response = await _leadService.DeleteLeadById(id);
@@ -45,6 +55,8 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpGet]
         [Route("GetAllLead")]
+        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetAllLead()
         {
             var response = await _leadService.GetAllLead();
