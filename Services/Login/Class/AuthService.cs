@@ -1,54 +1,55 @@
-﻿
-using Common;
+﻿using Common;
 using Models.Login;
 using Repository.Login.IClass;
+using Repository.Settings.IClass;
 using Services.Login.IClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Login.Class
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUsersRepository _userRepository;
+        private readonly IGroupsRepository _groupsRepository;
         private readonly JwtAcessToken _jwtAcesstoken;
-        private readonly SequenceGenerator _sequenceGenerator;
 
-        public AuthService(IUserRepository userRepository, JwtAcessToken jwtAcesstoken, SequenceGenerator sequenceGenerator)
+        public AuthService(IUsersRepository userRepository, JwtAcessToken jwtAcesstoken, IGroupsRepository groupsRepository)
         {
             _userRepository = userRepository;
             _jwtAcesstoken = jwtAcesstoken;
-            _sequenceGenerator = sequenceGenerator;
+            _groupsRepository = groupsRepository;
         }
         public async Task<AuthResponse> LoginAsync(LoginData loginData)
         {
-            var user = await _userRepository.GetUserByUserNameAsync(loginData.UserName);
+            var username = await _userRepository.GetUserByUserNameAsync(loginData.UserName);
 
-            if (user == null)
+            if (username == null)
             {
                 return new AuthResponse
                 {
                     Success = false,
-                    Message = "Invalid username or password."
+                    Message = "Invalid username or password.",  
+                    Error = "UnAuthorize Users"
                 };
             }
-            var token = await _jwtAcesstoken.GenerateJWT("admin");
-
+            var userDetails = await _userRepository.GetUserDetailsByUsername(loginData.UserName);
+            var getGroupData = await _groupsRepository.GetGroupsByGroupName(userDetails.GroupName);
+            var tokenRole = userDetails.FullName == "Admin" ? "admin" : "user";
+            var token = await _jwtAcesstoken.GenerateJWT(tokenRole);
             return new AuthResponse
             {
                 Success = true,
                 Token = token,
-                Message = "Login successful."
+                Message = "Login successful.",
+                EmployeeCode = userDetails.EmpCode,
+                GroupName = userDetails.GroupName,
+                Data = getGroupData
             };
         }
 
-        public async Task CreateUserAsync(User user)
-        {
-            user.Id = _sequenceGenerator.GetNextSequence("Demo_login", "Demologin_Sequence");
-            await _userRepository.CreateUserAsync(user);
-        }
+        //public async Task CreateUserAsync(User user)
+        //{
+        //    user.Id = _sequenceGenerator.GetNextSequence("Demo_login", "Demologin_Sequence");
+        //    await _userRepository.CreateUserAsync(user);
+        //}
     }
 }

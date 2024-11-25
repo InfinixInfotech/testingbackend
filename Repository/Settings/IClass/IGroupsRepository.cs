@@ -14,5 +14,6 @@ namespace Repository.Settings.IClass
         Task DeleteByIdAsync(int id);
         Task<List<Groups>> GetAllAsync();
         Task<Groups> GetGroupsById(int id);
+        Task<Groups> GetGroupsByGroupName(string groupName);
     }
 }

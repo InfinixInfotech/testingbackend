@@ -19,6 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("CreateDepartmentAsync")]
         [Authorize(Policy ="admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> CreateDepartmentAsync([FromBody] Department department)
         {
             var response = await _departmentService.CreateDepartmentAsync(department);
@@ -32,6 +33,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateDepartmentAsync")]
         [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> UpdateDepartmentAsync(int id, [FromBody] Department department)
         {
             var response = await _departmentService.UpdateDepartmentAsync(id, department);
@@ -45,6 +47,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpDelete]
         [Route("DeleteDepartmentAsync")]
         [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> DeleteDepartmentAsync(int id)
         {
             var response = await _departmentService.DeleteDepartmentAsync(id);
@@ -58,6 +61,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpGet]
         [Route("GetAllDepartmentAsync")]
         [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetAllDepartmentAsync()
         {
             var response = await _departmentService.GetAllDepartmentAsync();
@@ -70,6 +74,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpGet]
         [Route("GetDepartmentById")]
         [Authorize(Policy = "admin")]
+        [Authorize(Policy = "user")]
         public async Task<IActionResult> GetDepartmentById(int id)
         {
             var response = await _departmentService.GetDepartmentById(id);

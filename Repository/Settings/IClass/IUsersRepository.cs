@@ -9,5 +9,7 @@ namespace Repository.Settings.IClass
         Task UpdateUsersById(Users model);
         Task<List<Users>> GetAllUsers();
         Task<Users> GetUserById(int id);
+        Task<Users> GetUserByUserNameAsync(string userName);
+        Task<userresponseData> GetUserDetailsByUsername(string username);
     }
 }

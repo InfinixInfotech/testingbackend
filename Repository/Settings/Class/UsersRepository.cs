@@ -36,5 +36,26 @@ namespace Repository.Settings.Class
         {
             return await _collection.Find(user => user.Id == id).FirstOrDefaultAsync();
         }
+        public async Task<userresponseData> GetUserDetailsByUsername(string username)
+        {
+            var filter = Builders<Users>.Filter.Eq(u => u.UserName, username);
+            var projection = Builders<Users>.Projection.Expression(u => new userresponseData
+            {
+                EmpCode = u.EmployeeCode, 
+                GroupName = u.GroupName, 
+                FullName = u.FullName
+            });
+
+            var userDetails = await _collection.Find(filter).Project(projection).FirstOrDefaultAsync();
+
+            return userDetails;
+        }
+
+
+        public async Task<Users> GetUserByUserNameAsync(string userName)
+        {
+            return await _collection.Find(user => user.UserName == userName).FirstOrDefaultAsync();
+        }
+       
     }
 }

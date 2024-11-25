@@ -43,5 +43,9 @@ namespace Repository.Settings.Class
         {
             return await _admincollection.Find(user => user.Id == id).FirstOrDefaultAsync();
         }
+        public async Task<Groups> GetGroupsByGroupName(string groupName)
+        {
+            return await _admincollection.Find(user => user.GroupName == groupName).FirstOrDefaultAsync();
+        }
     }
 }

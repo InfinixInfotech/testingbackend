@@ -10,6 +10,6 @@ namespace Services.Login.IClass
     public interface IAuthService
     {
         Task<AuthResponse> LoginAsync(LoginData loginData);
-        Task CreateUserAsync(User user);
+        //Task CreateUserAsync(User user);
     }
 }

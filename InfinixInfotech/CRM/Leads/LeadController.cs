@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Leads;
 using Models.Settings;
@@ -6,6 +7,7 @@ using Services.Leads.IClass;
 
 namespace InfinixInfotech.CRM.Leads
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class LeadController : ControllerBase
@@ -24,6 +26,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpGet]
         [Route("GetLeadById")]
+
         public async Task<IActionResult> GetLeadById(int id)
         {
             var response = await _leadService.GetLeadById(id);

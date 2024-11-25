@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Login;
 using Services.Login.IClass;
@@ -22,23 +21,25 @@ namespace InfinixInfotech.CRM.Login
         public async Task<IActionResult> Login([FromBody] LoginData loginData)
         {
             var response = await _authService.LoginAsync(loginData);
+            HttpContext.Session.SetString("EmployeeCode", response.EmployeeCode);
+            HttpContext.Session.SetString("GroupName", response.GroupName);
             if (!response.Success)
                 return Unauthorized(new { message = response.Message });
 
-            return Ok(new { token = response.Token, message = response.Message });
+            return Ok(new { response });
         }
-        [HttpPost]
-        [Route("CreateUserAsync")]
-        public async Task<IActionResult> CreateUserAsync([FromBody] User user)
-        {
-            if (user == null)
-            {
-                return BadRequest("User data is required.");
-            }
+        //[HttpPost]
+        //[Route("CreateUserAsync")]
+        //public async Task<IActionResult> CreateUserAsync([FromBody] User user)
+        //{
+        //    if (user == null)
+        //    {
+        //        return BadRequest("User data is required.");
+        //    }
 
-            await _authService.CreateUserAsync(user);
-            return Ok("User Register Succesfully");
-        }
+        //    await _authService.CreateUserAsync(user);
+        //    return Ok("User Register Succesfully");
+        //}
     }
 }
 
