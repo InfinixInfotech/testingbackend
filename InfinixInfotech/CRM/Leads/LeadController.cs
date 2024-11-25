@@ -22,8 +22,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpPost]
         [Route("AddLead")]
-        [Authorize(Policy = "admin")]
-       // [Authorize(Policy = "user")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> AddLead([FromBody] Lead model)
         {
             var grpName = await _homeController.GetGroupName();
@@ -32,6 +31,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpGet]
         [Route("GetLeadById")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> GetLeadById(int id, string apiType, string accessType)
         {
             var grpName = await _homeController.GetGroupName();
@@ -40,8 +40,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpPut]
         [Route("UpdateLeadById")]
-        [Authorize(Policy = "admin")]
-        [Authorize(Policy = "user")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> UpdateLeadById([FromBody] Lead model)
         {
             var grpName = await _homeController.GetGroupName();
@@ -50,8 +49,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpDelete]
         [Route("DeleteLeadById")]
-        [Authorize(Policy = "admin")]
-        [Authorize(Policy = "user")]
+        [Authorize(Policy = "AdminOrUser")]
 
         public async Task<IActionResult> DeleteLeadById(int id, string apiType, string accessType)
         {
@@ -61,8 +59,7 @@ namespace InfinixInfotech.CRM.Leads
         }
         [HttpGet]
         [Route("GetAllLead")]
-        [Authorize(Policy = "admin")]
-        [Authorize(Policy = "user")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> GetAllLead(string apiType, string accessType)
         {
             var grpName = await _homeController.GetGroupName();
