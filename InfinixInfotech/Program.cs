@@ -9,15 +9,17 @@ using Services.Common.IClass;
 using System.Text;
 using Common;
 using Models.Common;
+using InfinixInfotech.CRM.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure services
 CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 
 builder.Services.AddScoped<JwtAcessToken>();
+builder.Services.AddScoped<HomeController>();
 builder.Services.AddScoped<SequenceGenerator>();
 
 // Configure MongoDB
@@ -61,12 +63,24 @@ builder.Services.AddDistributedMemoryCache();
 // Configure session
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(120);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromHours(12); // Session timeout
+    options.Cookie.HttpOnly = true;             // Secure session cookie
+    options.Cookie.IsEssential = true;          // For GDPR compliance
 });
 
+// Add HTTP Context Accessor
 builder.Services.AddHttpContextAccessor();
+
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddSwaggerGen(option =>
@@ -110,16 +124,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Enable session middleware
+app.UseSession(); // Ensure this is before any middleware that depends on session
+
+// Enable CORS
 app.UseCors("AllowSpecificOrigin");
 
 // Enable authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Enable session middleware
-app.UseSession();
-
-// Enable the custom token validation middleware
+// Enable custom token validation middleware
 app.UseMiddleware<TokenValidationMiddleware>();
 
 // Map controllers to route requests

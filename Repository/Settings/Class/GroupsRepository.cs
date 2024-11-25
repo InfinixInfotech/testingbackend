@@ -1,5 +1,6 @@
 ﻿using Models.Login;
 using Models.Settings;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Repository.Common;
 using Repository.Settings.IClass;
@@ -47,5 +48,24 @@ namespace Repository.Settings.Class
         {
             return await _admincollection.Find(user => user.GroupName == groupName).FirstOrDefaultAsync();
         }
+        public async Task<bool?> GetAccessKey(string apiType, string accessType, string groupName)
+        {
+            var filter = Builders<Groups>.Filter.And(
+                Builders<Groups>.Filter.Eq($"{apiType}.{accessType}", true),
+                Builders<Groups>.Filter.Eq("GroupName", groupName) 
+            );
+            var user = await _admincollection.Find(filter).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                var bsonDocument = user.ToBsonDocument();
+                if (bsonDocument.Contains(apiType) && bsonDocument[apiType].AsBsonDocument.Contains(accessType))
+                {
+                    return bsonDocument[apiType][accessType].AsBoolean;
+                }
+            }
+            return null;
+        }
+
+
     }
 }

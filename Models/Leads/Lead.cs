@@ -10,6 +10,8 @@ namespace Models.Leads
     public class Lead
     {
         public int Id { get; set; } 
+        public string apiType { get; set; } 
+        public string accessType { get; set; }  
         public string LeadId { get; set; }
         public string ClientName { get; set; }
         public string AssignedTo { get; set; }
