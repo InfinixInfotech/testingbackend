@@ -50,11 +50,12 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Add authorization
+// Add authorization with combined policy
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("admin", policy => policy.RequireRole("admin"));
-    options.AddPolicy("user", policy => policy.RequireRole("user"));
+    options.AddPolicy("AdminOrUser", policy =>
+        policy.RequireAssertion(context =>
+            context.User.IsInRole("admin") || context.User.IsInRole("user")));
 });
 
 // Configure distributed cache (Memory)

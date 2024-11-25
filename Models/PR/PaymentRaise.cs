@@ -14,6 +14,7 @@ namespace Models.PR
         public string EmployeeCode { get; set; }
         public string EmployeeName { get; set; }
         public string PrId { get; set; }
+        public string LeadId { get; set; }
         public ClientDetails ClientDetails { get; set; }
         public ProductDetails ProductDetails { get; set; }
         public PaymentDetails PaymentDetails { get; set; }

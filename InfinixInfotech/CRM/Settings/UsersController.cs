@@ -18,7 +18,7 @@ namespace InfinixInfotech.CRM.Settings
 
         [HttpPost]
         [Route("AddUsers")]
-        [Authorize(Policy = "admin")]
+        //[Authorize(Policy = "admin")]
         public async Task<IActionResult> AddUsers([FromBody] Users model)
         {
             var response = await _usersService.AddUsers(model);

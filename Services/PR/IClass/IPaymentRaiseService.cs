@@ -10,10 +10,10 @@ namespace Services.PR.IClass
 {
     public interface IPaymentRaiseService
     {
-        Task<Response> LeadPR(PaymentRaise model);
-        Task<Response> GetLeadPRById(int id);
-        Task<Response> UpdateLeadPRById(PaymentRaise model);
-        Task<Response> DeleteLeadPRById(int id);
-        Task<Response> GetAllLeadPR();
+        Task<Response> LeadPR(PaymentRaise model, string groupName);
+        Task<Response> GetLeadPRById(int id, string apiType, string accessType, string groupName);
+        Task<Response> UpdateLeadPRById(PaymentRaise model, string groupName);
+        Task<Response> DeleteLeadPRById(int id, string apiType, string accessType, string groupName);
+        Task<Response> GetAllLeadPR(string apiType, string accessType, string groupName);
     }
 }
