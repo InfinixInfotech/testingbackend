@@ -16,7 +16,7 @@ namespace Models.Settings
         public Contact Contact { get; set; }
         public MutualFund MutualFund { get; set; }
         public FreeTrial FreeTrial { get; set; }
-        public SO SO { get; set; }
+        public _SO SO { get; set; }
         public Compliance Compliance { get; set; }
         public LeadTemplate LeadTemplate { get; set; }
         public ClientTemplate ClientTemplate { get; set; }
@@ -94,7 +94,7 @@ public class FreeTrial
     public bool OuterAssign { get; set; }
 }
 
-public class SO
+public class _SO
 {
     public bool Create { get; set; }
     public bool View { get; set; }

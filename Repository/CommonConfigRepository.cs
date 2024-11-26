@@ -10,6 +10,8 @@ using Repository.PR.Class;
 using Repository.PR.IClass;
 using Repository.Settings.Class;
 using Repository.Settings.IClass;
+using Repository.SO.Class;
+using Repository.SO.IClass;
 
 namespace Repository
 {
@@ -32,6 +34,7 @@ namespace Repository
             services.AddScoped<ILeadRepository, LeadRepository>();
             services.AddScoped<IPaymentRaiseRepository, PaymentRaiseRepository>();
             services.AddScoped<IIdentifierService, IdentifierService>();
+            services.AddScoped<ISORepository, SORepository>();
 
         }
 
