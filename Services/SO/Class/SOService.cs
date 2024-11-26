@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Models.Common;
 using Models.Leads;
 using Models.Settings;
 using Models.SO;
@@ -29,6 +30,8 @@ namespace Services.SO.Class
         {
             _repository = repository;
             _sequenceGenerator = sequenceGenerator;
+            _identifierService = identifierService;
+            _groupsRepository = groupsRepository;
         }
         public async Task<Response> GetAllSO(string apitype , string accessType,string groupName)
         {
@@ -60,10 +63,12 @@ namespace Services.SO.Class
         {
             try
             {
+                
                 var isAccessType = await _groupsRepository.GetAccessKey(sO.apiType, sO.accessType, groupName);
                 if (isAccessType == true)
                 {
                     sO.Id = _sequenceGenerator.GetNextSequence("Demo_lead", "Demolead  _Sequence");
+                    sO.SoId = await GetNextIdentifierAsync();
                     if (sO == null || string.IsNullOrEmpty(sO.EmployeeCode))
                     {
                         return new Response
@@ -195,6 +200,13 @@ namespace Services.SO.Class
                 return new Response { Success = false, Error = ex.Message };
             }
         }
+        public async Task<string> GetNextIdentifierAsync()
+        {
+            long nextIdNumber = _sequenceGenerator.GetNextSequence("Demo_SONo", "SONo");
+            var nextId = $"SO{nextIdNumber:D2}";
+            await _identifierService.InsertIdentifierAsync(new InfinixId { Id = nextId });
 
+            return nextId;
+        }
     }
 }

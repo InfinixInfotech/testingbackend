@@ -11,7 +11,6 @@ namespace Models.SO
         public int Id {  get; set; }
         public string apiType { get; set; }
         public string accessType { get; set; }
-        public string groupName { get; set; }
         public string EmployeeCode { get; set; }
         public string EmployeeName { get; set; }
         public string SoId { get; set; }
