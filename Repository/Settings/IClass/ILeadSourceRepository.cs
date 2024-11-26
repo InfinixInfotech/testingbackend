@@ -14,5 +14,6 @@ namespace Repository.Settings.IClass
         Task InsertAsync(LeadSource leadSource);
         Task UpdateAsync(LeadSource leadSource);
         Task DeleteAsync(int id);
+       
     }
 }

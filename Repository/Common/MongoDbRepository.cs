@@ -5,6 +5,7 @@ using Models.Leads;
 using Models.Login;
 using Models.PR;
 using Models.Settings;
+using Models.SO;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -38,5 +39,6 @@ namespace Repository.Common
         public IMongoCollection<Lead> Lead => _database.GetCollection<Lead>("Lead");
         public IMongoCollection<PaymentRaise> PaymentRaise => _database.GetCollection<PaymentRaise>("PaymentRaise");
         public IMongoCollection<InfinixId> InfinixId => _database.GetCollection<InfinixId>("InfinixId");
+        public IMongoCollection<So> So => _database.GetCollection<So>("So");
     }
 }

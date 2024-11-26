@@ -50,7 +50,7 @@ namespace Services.PR.Class
             {
                 return new Response { Success = false, Error = ex.Message };
             }
-        }
+        }  
         public async Task<string> GetNextIdentifierAsync()
         {
             long nextIdNumber = _sequenceGenerator.GetNextSequence("Demo_LeadNo", "LeadNo");

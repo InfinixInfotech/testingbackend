@@ -12,6 +12,8 @@ using Services.PR.Class;
 using Services.PR.IClass;
 using Services.Settings.Class;
 using Services.Settings.IClass;
+using Services.SO.Class;
+using Services.SO.IClass;
 
 namespace Services
 {
@@ -19,7 +21,7 @@ namespace Services
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-           services.AddScoped<Security>();
+            services.AddScoped<Security>();
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IDemoService, DemoService>();
             services.AddScoped<IAuthService, AuthService>();
@@ -33,6 +35,7 @@ namespace Services
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ILeadService, LeadService>();
             services.AddScoped<IPaymentRaiseService, PaymentRaiseService>();
+            services.AddScoped<ISOService, SOService>();
         }
     }
 }
