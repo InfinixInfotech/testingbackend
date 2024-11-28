@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization;
+﻿using Models.Common;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
@@ -37,7 +38,7 @@ namespace Models.Settings
         public string CustomFetchRatio { get; set; }
         public int OTPNumber { get; set; }
         [BsonElement("DateOfBirth")]
-        [BsonSerializer(typeof(CustomDateSerializer))]
+        [BsonSerializer(typeof(CustomDateTimeSerializer))]
         public DateTime DateOfBirth { get; set; }
         public DateTime DateOfJoining { get; set; }
         public string Branch { get; set; }
@@ -77,18 +78,4 @@ public class BankDetails
     public string BankName { get; set; }
     public string IFSC { get; set; }
     public string AccountNumber { get; set; }
-}
-public class CustomDateSerializer : SerializerBase<DateTime>
-{
-    private const string DateFormat = "dd-MM-yyyy";
-    public override DateTime Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
-    {
-        var dateAsString = context.Reader.ReadString();
-        return DateTime.ParseExact(dateAsString, DateFormat, null);
-    }
-    public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, DateTime value)
-    {
-        var dateAsString = value.ToString(DateFormat);
-        context.Writer.WriteString(dateAsString);
-    }
 }
