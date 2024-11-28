@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using Models.Common;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Models.Leads
         public string City { get; set; }
         public string State { get; set; }
         [BsonElement("Dob")]
-        [BsonSerializer(typeof(CustomDateSerializer))]
+        [BsonSerializer(typeof(CustomDateTimeSerializer))]
         public DateTime Dob { get; set; }
         public string Language { get; set; }
         public FollowupDetail FollowupDetail { get; set; }
