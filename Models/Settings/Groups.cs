@@ -10,7 +10,7 @@ namespace Models.Settings
     public class Groups
     {
         public int Id { get; set; }
-        public string GroupName { get; set; }
+        public GroupsName GroupName { get; set; }
         public Dashboard Dashboard { get; set; }
         public Leadss Leads { get; set; }
         public Contact Contact { get; set; }
@@ -266,6 +266,13 @@ public class ClientFetch
     public bool Active { get; set; }
     public List<string> From { get; set; }
     public string Ratio { get; set; }
-}    
+}
+
+public class GroupsName
+{   
+    public string GroupName { get; set; }
+    public string GroupID { get; set; }
+}
+
 
 

@@ -46,10 +46,10 @@ namespace Repository.Settings.Class
         }
         public async Task<Groups> GetGroupsByGroupName(string groupName)
         {
-            return await _admincollection.Find(user => user.GroupName == groupName).FirstOrDefaultAsync();
+            return await _admincollection.Find(user => user.GroupName.GroupName == groupName).FirstOrDefaultAsync();
         }
         public async Task<bool?> GetAccessKey(string apiType, string accessType, string groupName)
-        {
+        {   
             var filter = Builders<Groups>.Filter.And(
                 Builders<Groups>.Filter.Eq($"{apiType}.{accessType}", true),
                 Builders<Groups>.Filter.Eq("GroupName", groupName) 
@@ -65,7 +65,20 @@ namespace Repository.Settings.Class
             }
             return null;
         }
-
+        public async Task<string> GetGroupIdByGroupName(string groupName)
+        {
+            var group = await _admincollection
+                .Find(user => user.GroupName.GroupName == groupName)
+                .FirstOrDefaultAsync();
+            return group?.GroupName.GroupID;
+        }
+        public async Task<string> GetByGroupNameGroupId(string groupId)
+        {
+            var group = await _admincollection
+                .Find(user => user.GroupName.GroupID == groupId)
+                .FirstOrDefaultAsync();
+            return group?.GroupName.GroupID;
+        }
 
     }
 }

@@ -16,5 +16,7 @@ namespace Repository.Settings.IClass
         Task<Groups> GetGroupsById(int id);
         Task<Groups> GetGroupsByGroupName(string groupName);
         Task<bool?> GetAccessKey(string apiType, string accessType,string groupName);
+        Task<string> GetGroupIdByGroupName(string groupName);
+        Task<string> GetByGroupNameGroupId(string groupId);
     }
 }
