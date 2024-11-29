@@ -6,6 +6,8 @@ using Repository.Leads.Class;
 using Repository.Leads.IClass;
 using Repository.Login.Class;
 using Repository.Login.IClass;
+using Repository.Mail.Class;
+using Repository.Mail.IClass;
 using Repository.PR.Class;
 using Repository.PR.IClass;
 using Repository.Settings.Class;
@@ -35,6 +37,8 @@ namespace Repository
             services.AddScoped<IPaymentRaiseRepository, PaymentRaiseRepository>();
             services.AddScoped<IIdentifierService, IdentifierService>();
             services.AddScoped<ISORepository, SORepository>();
+            services.AddScoped<ISMSRepository, SMSRepository>();
+
 
         }
 

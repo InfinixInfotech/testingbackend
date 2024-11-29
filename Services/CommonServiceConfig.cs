@@ -8,6 +8,8 @@ using Services.Leads.Class;
 using Services.Leads.IClass;
 using Services.Login.Class;
 using Services.Login.IClass;
+using Services.Mail.Class;
+using Services.Mail.IClass;
 using Services.PR.Class;
 using Services.PR.IClass;
 using Services.Settings.Class;
@@ -36,6 +38,7 @@ namespace Services
             services.AddScoped<ILeadService, LeadService>();
             services.AddScoped<IPaymentRaiseService, PaymentRaiseService>();
             services.AddScoped<ISOService, SOService>();
+            services.AddScoped<ISMSService, SMSService>();
         }
     }
 }

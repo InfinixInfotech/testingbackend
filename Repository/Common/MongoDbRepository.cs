@@ -3,6 +3,7 @@ using Models.Common;
 using Models.Demo;
 using Models.Leads;
 using Models.Login;
+using Models.Mail;
 using Models.PR;
 using Models.Settings;
 using Models.SO;
@@ -40,5 +41,6 @@ namespace Repository.Common
         public IMongoCollection<PaymentRaise> PaymentRaise => _database.GetCollection<PaymentRaise>("PaymentRaise");
         public IMongoCollection<InfinixId> InfinixId => _database.GetCollection<InfinixId>("InfinixId");
         public IMongoCollection<So> So => _database.GetCollection<So>("So");
+        public IMongoCollection<Email> Email => _database.GetCollection<Email>("Email");
     }
 }

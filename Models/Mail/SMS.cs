@@ -11,13 +11,15 @@ namespace Models.Mail
 {
     public class SMS
     {
-        public List<string> From { get; set; }
-        public string To { get; set; }
+        public string apiType { get; set; }
+        public string accessType { get; set; }
+        public List<string> To { get; set; }
+        public string From { get; set; }
         public List<string> CC { get; set; }
         public List<string> BCC { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
-        public List<IFormFile> Attachment { get; set; }
+        public List<IFormFile>? Attachment { get; set; }
         [BsonElement("CreateDate")]
         [BsonSerializer(typeof(CustomDateTimeSerializer))]
         public DateTime CreateDate { get; set; }

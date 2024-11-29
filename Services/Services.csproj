@@ -21,9 +21,4 @@
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mail\Class\" />
-    <Folder Include="Mail\IClass\" />
-  </ItemGroup>
-
 </Project>

@@ -33,8 +33,4 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CRM\Mail\" />
-  </ItemGroup>
-
 </Project>
