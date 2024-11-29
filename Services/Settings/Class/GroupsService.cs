@@ -29,7 +29,7 @@ namespace Services.Settings.Class
             try
             {
                 model.Id = _sequenceGenerator.GetNextSequence("Demo_group", "Demogroup_Sequence");
-                model.GroupName.GroupID = await GetNextIdentifierAsync();
+                model.GroupId = await GetNextIdentifierAsync();
                 await _groupsRepository.InsertAsync(model);
                 return new Response { Success = true, Message = "Add Group added successfully" };
             }
