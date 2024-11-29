@@ -25,6 +25,7 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpPost]
         [Route("AddSMS")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> AddSMS([FromForm] SMS model)
         {
             var grpName = await _homeController.GetGroupName();
@@ -33,6 +34,7 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpGet]
         [Route("GetSMSById")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> GetSMSById(int id, string apiType, string accessType)
         {
             var grpName = await _homeController.GetGroupName();
@@ -41,6 +43,7 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpPut]
         [Route("UpdateSMSById")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> UpdateSMSById([FromForm] Email model)
         {
             var grpName = await _homeController.GetGroupName();
@@ -49,6 +52,7 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpDelete]
         [Route("DeleteSMSById")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> DeleteSMSById(int id, string apiType, string accessType)
         {
             var grpName = await _homeController.GetGroupName();
@@ -57,6 +61,7 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpGet]
         [Route("GetAllSMS")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> GetAllSMS (string apiType, string accessType)
         {
             var grpName = await _homeController.GetGroupName();
