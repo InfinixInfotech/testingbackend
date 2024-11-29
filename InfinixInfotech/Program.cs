@@ -18,6 +18,7 @@ CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
 builder.Services.AddControllers();
 
+// Add scoped services
 builder.Services.AddScoped<JwtAcessToken>();
 builder.Services.AddScoped<HomeController>();
 builder.Services.AddScoped<SequenceGenerator>();
@@ -31,7 +32,13 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
 });
 
 // Configure JWT Authentication
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
+var jwtKey = builder.Configuration["Jwt:Key"];
+if (string.IsNullOrEmpty(jwtKey))
+{
+    throw new InvalidOperationException("JWT Key is not configured. Please set it in the configuration.");
+}
+
+var key = Encoding.UTF8.GetBytes(jwtKey);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,23 +52,32 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false, // Set to true if you want to validate issuer
-        ValidateAudience = false, // Set to true if you want to validate audience
+        ValidateIssuer = false, // Set to true if you want to validate the issuer
+        ValidateAudience = false, // Set to true if you want to validate the audience
     };
 });
 
-// Add authorization with combined policy
+// Configure Authorization
 builder.Services.AddAuthorization(options =>
 {
+    // Define the "admin" policy
+    options.AddPolicy("admin", policy =>
+      policy.RequireRole("admin"));
+
+    // Define the "AdminOrUser" policy
     options.AddPolicy("AdminOrUser", policy =>
         policy.RequireAssertion(context =>
             context.User.IsInRole("admin") || context.User.IsInRole("user")));
+
+    // Define the "user" policy (to resolve the error)
+    options.AddPolicy("user", policy =>
+        policy.RequireRole("user"));
 });
 
-// Configure distributed cache (Memory)
+// Configure Distributed Cache (Memory Cache)
 builder.Services.AddDistributedMemoryCache();
 
-// Configure session
+// Configure Session
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(12); // Session timeout
@@ -75,25 +91,25 @@ builder.Services.AddHttpContextAccessor();
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
+    options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
     });
 });
 
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddSwaggerGen(option =>
 {
-    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n" +
+        Description = "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
                       "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
                       "Example: \"Bearer 1safsfsdfdfd\"",
     });
@@ -135,8 +151,17 @@ app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Enable custom token validation middleware
-app.UseMiddleware<TokenValidationMiddleware>();
+// Custom middleware to handle unauthorized access
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == 401) // Unauthorized
+    {
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync("{\"error\": \"Unauthorized access\"}");
+    }
+});
 
 // Map controllers to route requests
 app.MapControllers();

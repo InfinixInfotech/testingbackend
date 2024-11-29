@@ -56,6 +56,28 @@ namespace Repository.Settings.Class
         {
             return await _collection.Find(user => user.UserName == userName).FirstOrDefaultAsync();
         }
-       
+        public async Task<List<Users>> GetAllUserDetailsByGroupName(string groupName)
+        {
+            var filter = Builders<Users>.Filter.Eq(u => u.GroupName, groupName);
+            return await _collection
+                .Find(filter)
+                .ToListAsync();
+        }
+        public async Task<List<EmployeeDetails>> GetAllEmployeeCodeEmployeeNameByGroupName(string groupName)
+        {
+            var filter = Builders<Users>.Filter.Eq(u => u.GroupName, groupName);
+            var employeeDetails = await _collection
+                .Find(filter)
+                .Project(user => new EmployeeDetails
+                {
+                    EmployeeCode = user.EmployeeCode, 
+                    EmployeeName = user.FullName  
+                })
+                .ToListAsync();
+
+            return employeeDetails;
+        }
+
+
     }
 }

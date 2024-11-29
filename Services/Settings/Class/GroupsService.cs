@@ -1,5 +1,7 @@
 ﻿using Common;
+using Models.Common;
 using Models.Settings;
+using Repository.Common;
 using Repository.Settings.IClass;
 using Services.Settings.IClass;
 using System;
@@ -14,17 +16,20 @@ namespace Services.Settings.Class
     {
         private readonly IGroupsRepository _groupsRepository;
         private readonly SequenceGenerator _sequenceGenerator;
+        private readonly IIdentifierService _identifierService;
 
-        public GroupsService(IGroupsRepository groupsRepository, SequenceGenerator sequenceGenerator) 
+        public GroupsService(IGroupsRepository groupsRepository, SequenceGenerator sequenceGenerator, IIdentifierService identifierService) 
         { 
             _groupsRepository = groupsRepository;
             _sequenceGenerator = sequenceGenerator;
+            _identifierService = identifierService;
         }
         public async Task<Response> InsertAsync(Groups model)
         {
             try
             {
                 model.Id = _sequenceGenerator.GetNextSequence("Demo_group", "Demogroup_Sequence");
+                model.GroupName.GroupID = await GetNextIdentifierAsync();
                 await _groupsRepository.InsertAsync(model);
                 return new Response { Success = true, Message = "Add Group added successfully" };
             }
@@ -87,6 +92,14 @@ namespace Services.Settings.Class
             {
                 return new Response { Success = false, Error = ex.Message };
             }
+        }
+        public async Task<string> GetNextIdentifierAsync()
+        {
+            long nextIdNumber = _sequenceGenerator.GetNextSequence("Demo_GroupIDNo", "GroupIDNo");
+            var nextId = $"INFGRP{nextIdNumber:D2}";
+            await _identifierService.InsertIdentifierAsync(new InfinixId { Id = nextId });
+
+            return nextId;
         }
     }
 }

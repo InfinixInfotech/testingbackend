@@ -21,6 +21,7 @@ namespace InfinixInfotech.CRM.Login
         public async Task<IActionResult> Login([FromBody] LoginData loginData)
         {
             var response = await _authService.LoginAsync(loginData);
+            
             HttpContext.Session.SetString("EmployeeCode", response.EmployeeCode);
             HttpContext.Session.SetString("GroupName", response.GroupName);
             if (!response.Success)
@@ -28,18 +29,7 @@ namespace InfinixInfotech.CRM.Login
 
             return Ok(new { response });
         }
-        //[HttpPost]
-        //[Route("CreateUserAsync")]
-        //public async Task<IActionResult> CreateUserAsync([FromBody] User user)
-        //{
-        //    if (user == null)
-        //    {
-        //        return BadRequest("User data is required.");
-        //    }
-
-        //    await _authService.CreateUserAsync(user);
-        //    return Ok("User Register Succesfully");
-        //}
+     
     }
 }
 

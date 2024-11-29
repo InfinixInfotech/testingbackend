@@ -10,12 +10,14 @@ namespace Services.Settings.Class
 {
     public class UsersService : IUsersService
     {
+        private readonly IGroupsRepository _groupsRepository;
         private readonly IUsersRepository _usersRepository;
         private readonly SequenceGenerator _sequenceGenerator;
-        public UsersService(IUsersRepository usersRepository, SequenceGenerator sequenceGenerator)
+        public UsersService(IUsersRepository usersRepository, SequenceGenerator sequenceGenerator, IGroupsRepository groupsRepository)
         {
             _usersRepository = usersRepository;   
             _sequenceGenerator = sequenceGenerator;
+            _groupsRepository = groupsRepository;
         }
         public async Task<Response> AddUsers(Users users)
         {
@@ -31,6 +33,7 @@ namespace Services.Settings.Class
                         Data = Emp,
                     };
                 }
+                users.GroupId = await _groupsRepository.GetGroupIdByGroupName(users.GroupName);                
                 var id = _sequenceGenerator.GetNextSequence("Demo_users", "Demousers_Sequence");
                 users.Id = id;
                 var splitValue = GenerateSplitValue(users);

@@ -23,6 +23,7 @@ namespace Models.Settings
         public int Target { get; set; }
         public string ReportingTo { get; set; }
         public string GroupName { get; set; }
+        public string GroupId { get; set; }
         public string DepartmentName { get; set; }
         public string DesignationName { get; set; }
         public string QualificationName { get; set; }
