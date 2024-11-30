@@ -33,11 +33,11 @@ namespace Services.Settings.Class
             }
         }
 
-        public async Task<Response> UpdateSegmentPlanByIdAsync(int id, SegmentPlan segmentPlan)
+        public async Task<Response> UpdateSegmentPlanByIdAsync(SegmentPlan segmentPlan)
         {
             try
             {
-                await _segmentPlanRepository.UpdateSegmentPlanByIdAsync(id, segmentPlan);
+                await _segmentPlanRepository.UpdateSegmentPlanByIdAsync(segmentPlan);
                 return new Response { Success = true, Message = "Segment plan updated successfully" };
             }
             catch (Exception ex)

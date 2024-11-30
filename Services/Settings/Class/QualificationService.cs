@@ -33,12 +33,11 @@ namespace Services.Settings.Class
             }
         }
 
-        public async Task<Response> UpdateQualificationByIdAsync(int id, Qualification qualification)
+        public async Task<Response> UpdateQualificationByIdAsync(Qualification qualification)
         {
             try
-            {
-                qualification.Id = id; // Ensure ID is set
-                await _qualificationRepository.UpdateQualificationByIdAsync(id, qualification);
+            { // Ensure ID is set
+                await _qualificationRepository.UpdateQualificationByIdAsync(qualification);
                 return new Response { Success = true, Message = "Qualification updated successfully." };
             }
             catch (Exception ex)

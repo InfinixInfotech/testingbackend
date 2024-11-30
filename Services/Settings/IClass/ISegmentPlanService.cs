@@ -11,7 +11,7 @@ namespace Services.Settings.IClass
     public interface ISegmentPlanService
     {
         Task<Response> InsertSegmentPlanAsync(SegmentPlan segmentPlan);
-        Task<Response> UpdateSegmentPlanByIdAsync(int id, SegmentPlan segmentPlan);
+        Task<Response> UpdateSegmentPlanByIdAsync(SegmentPlan segmentPlan);
         Task<Response> DeleteSegmentPlanByIdAsync(int id);
         Task<Response> GetAllSegmentPlanAsync();
         Task<Response> GetSegmentById(int id);

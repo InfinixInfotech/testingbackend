@@ -11,7 +11,7 @@ namespace Services.Settings.IClass
     public interface IDepartmentService
     {
         Task<Response> CreateDepartmentAsync(Department department);
-        Task<Response> UpdateDepartmentAsync(int id, Department department);
+        Task<Response> UpdateDepartmentAsync(Department department);
         Task<Response> DeleteDepartmentAsync(int id);
         Task<Response> GetAllDepartmentAsync();
         Task<Response> GetDepartmentById(int id);

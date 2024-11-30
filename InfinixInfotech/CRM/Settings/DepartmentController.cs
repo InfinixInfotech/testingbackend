@@ -34,9 +34,9 @@ namespace InfinixInfotech.CRM.Settings
         [Route("UpdateDepartmentAsync")]
         [Authorize(Policy = "admin")]
         [Authorize(Policy = "user")]
-        public async Task<IActionResult> UpdateDepartmentAsync(int id, [FromBody] Department department)
+        public async Task<IActionResult> UpdateDepartmentAsync([FromBody] Department department)
         {
-            var response = await _departmentService.UpdateDepartmentAsync(id, department);
+            var response = await _departmentService.UpdateDepartmentAsync( department);
             if (response.Success)
             {
                 return Ok(response);

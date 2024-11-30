@@ -38,21 +38,19 @@ namespace Services.Settings.Class
             return response;
         }
 
-        public async Task<Response> UpdateDepartmentAsync(int id, Department department)
+        public async Task<Response> UpdateDepartmentAsync(Department department)
         {
             var response = new Response();
             try
             {
-                var existingDepartment = await _departmentRepository.GetByIdDepartmentAsync(id);
+                var existingDepartment = await _departmentRepository.GetByIdDepartmentAsync(department.Id);
                 if (existingDepartment == null)
                 {
                     response.Success = false;
                     response.Error = "Department not found.";
                     return response;
                 }
-
-                department.Id = id;
-                await _departmentRepository.UpdateDepartmentAsync(id, department);
+                await _departmentRepository.UpdateDepartmentAsync(department);
                 response.Success = true;
                 response.Message = "Department updated successfully.";
             }

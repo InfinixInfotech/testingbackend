@@ -28,9 +28,9 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateQualificationByIdAsync")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateQualificationByIdAsync(int id, [FromBody] Qualification qualification)
+        public async Task<IActionResult> UpdateQualificationByIdAsync([FromBody] Qualification qualification)
         {
-            var response = await _service.UpdateQualificationByIdAsync(id, qualification);
+            var response = await _service.UpdateQualificationByIdAsync(qualification);
             return Ok(response);
         }
 

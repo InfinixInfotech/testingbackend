@@ -10,7 +10,7 @@ namespace Repository.Settings.IClass
     public interface ISegmentRepository
     {
         Task InsertSegmentAsync(Segment entity);
-        Task UpdateSegmentByIdAsync(int id, Segment entity);
+        Task UpdateSegmentByIdAsync(Segment entity);
         Task DeleteSegmentByIdAsync(int id);
         Task<List<Segment>> GetAllSegmentAsync();
         Task<Segment> GetSegmentById(int id);

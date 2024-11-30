@@ -54,9 +54,9 @@ namespace Services.Settings.Class
             };
         }
 
-        public async Task<Response> UpdateAsync(int id, LeadStatus leadStatus)
+        public async Task<Response> UpdateAsync(LeadStatus leadStatus)
         {
-            var existing = await _leadStatusRepository.GetByIdAsync(id);
+            var existing = await _leadStatusRepository.GetByIdAsync(leadStatus.Id);
             if (existing == null)
             {
                 return new Response
@@ -67,7 +67,7 @@ namespace Services.Settings.Class
                 };
             }
 
-            await _leadStatusRepository.UpdateByIdAsync(id,leadStatus);
+            await _leadStatusRepository.UpdateByIdAsync(leadStatus);
             return new Response
             {
                 Success = true,

@@ -10,7 +10,7 @@ namespace Repository.Settings.IClass
     public interface IQualificationRepository
     {
         Task InsertQualificationAsync(Qualification qualification);
-        Task UpdateQualificationByIdAsync(int id, Qualification qualification);
+        Task UpdateQualificationByIdAsync(Qualification qualification);
         Task DeleteQualificationByIdAsync(int id);
         Task<List<Qualification>> GetAllQualificationAsync();
         Task<Qualification> GetQualificationById(int id);

@@ -35,9 +35,9 @@ namespace Repository.Settings.Class
             await _collection.InsertOneAsync(leadStatus);
         }
 
-        public async Task UpdateByIdAsync(int id, LeadStatus model)
+        public async Task UpdateByIdAsync(LeadStatus model)
         {
-            var filter = Builders<LeadStatus>.Filter.Eq("_id", id);
+            var filter = Builders<LeadStatus>.Filter.Eq("_id", model.Id);
             await _collection.ReplaceOneAsync(filter, model);
         }
 
