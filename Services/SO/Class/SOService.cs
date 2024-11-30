@@ -107,7 +107,7 @@ namespace Services.SO.Class
                 if (isAccessType == true)
                 {
                     var existing = await _repository.GetByIdAsync(sO.Id);
-                    if (existing == null)
+                    if (existing != null)
                     {
                         await _repository.UpdateSO(sO);
                         return new Response
