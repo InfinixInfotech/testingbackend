@@ -12,7 +12,7 @@ namespace Repository.Settings.IClass
         Task<IEnumerable<LeadStatus>> GetAllAsync();
         Task<LeadStatus> GetByIdAsync(int id);
         Task InsertAsync(LeadStatus leadStatus);
-        Task UpdateByIdAsync(int id, LeadStatus leadStatus);
+        Task UpdateByIdAsync(LeadStatus leadStatus);
         Task DeleteAsync(int id);
     }
 }

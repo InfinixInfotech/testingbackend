@@ -28,9 +28,9 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateSegmentPlanByIdAsync")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateSegmentPlanByIdAsync(int id, SegmentPlan segmentPlan)
+        public async Task<IActionResult> UpdateSegmentPlanByIdAsync(SegmentPlan segmentPlan)
         {
-            var response = await _segmentPlan.UpdateSegmentPlanByIdAsync(id, segmentPlan);
+            var response = await _segmentPlan.UpdateSegmentPlanByIdAsync(segmentPlan);
             return Ok(response);
         }
 

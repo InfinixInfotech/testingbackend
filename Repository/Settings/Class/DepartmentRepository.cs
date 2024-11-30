@@ -32,9 +32,9 @@ namespace Repository.Settings.Class
             await _collection.InsertOneAsync(department);
         }
 
-        public async Task UpdateDepartmentAsync(int id, Department department)
+        public async Task UpdateDepartmentAsync(Department department)
         {
-            await _collection.ReplaceOneAsync(d => d.Id == id, department);
+            await _collection.ReplaceOneAsync(d => d.Id == department.Id, department);
         }
 
         public async Task DeleteDepartmentAsync(int id)

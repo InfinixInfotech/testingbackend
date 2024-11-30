@@ -22,9 +22,9 @@ namespace Repository.Settings.Class
             await _collection.InsertOneAsync(qualification);
         }
 
-        public async Task UpdateQualificationByIdAsync(int id, Qualification qualification)
+        public async Task UpdateQualificationByIdAsync(Qualification qualification)
         {
-            await _collection.ReplaceOneAsync(q => q.Id == id, qualification);
+            await _collection.ReplaceOneAsync(q => q.Id == qualification.Id, qualification);
         }
 
         public async Task DeleteQualificationByIdAsync(int id)

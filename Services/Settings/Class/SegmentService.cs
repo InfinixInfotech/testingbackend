@@ -35,12 +35,11 @@ namespace Services.Settings.Class
             }
         }
 
-        public async Task<Response> UpdateSegmentByIdAsync(int id, Segment segment)
+        public async Task<Response> UpdateSegmentByIdAsync(Segment segment)
         {
             try
             {
-                segment.Id = id; // Ensure the Id matches
-                await _segmentRepository.UpdateSegmentByIdAsync(id, segment);
+                await _segmentRepository.UpdateSegmentByIdAsync(segment);
                 return new Response { Success = true, Message = "Segment updated successfully." };
             }
             catch (Exception ex)

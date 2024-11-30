@@ -22,9 +22,9 @@ namespace Repository.Settings.Class
             await _collection.InsertOneAsync(segmentPlan);
         }
 
-        public async Task UpdateSegmentPlanByIdAsync(int id, SegmentPlan segmentPlan)
+        public async Task UpdateSegmentPlanByIdAsync(SegmentPlan segmentPlan)
         {
-            var filter = Builders<SegmentPlan>.Filter.Eq(x => x.Id, id);
+            var filter = Builders<SegmentPlan>.Filter.Eq(x => x.Id, segmentPlan.Id);
             await _collection.ReplaceOneAsync(filter, segmentPlan);
         }
 

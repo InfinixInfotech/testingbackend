@@ -12,7 +12,7 @@ namespace Repository.Settings.IClass
         Task<IEnumerable<Department>> GetAllDepartmentAsync();
         Task<Department> GetByIdDepartmentAsync(int id);
         Task CreateDepartmentAsync(Department department);
-        Task UpdateDepartmentAsync(int id, Department department);
+        Task UpdateDepartmentAsync(Department department);
         Task DeleteDepartmentAsync(int id);
     }
 }
