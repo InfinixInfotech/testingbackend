@@ -109,11 +109,12 @@ namespace Services.SO.Class
                     var existing = await _repository.GetByIdAsync(sO.Id);
                     if (existing == null)
                     {
+                        await _repository.UpdateSO(sO);
                         return new Response
                         {
-                            Success = false,
-                            Error = "LeadStatus not found",
-                            Message = null
+                            Success = true,
+                            Message = "SO updated successfully",
+                            Error = null
                         };
                     }
                     else
@@ -121,13 +122,7 @@ namespace Services.SO.Class
                         return new Response { Success = false, Message = "Unauthorize cradential" };
                     }
                 }
-                await _repository.UpdateSO(sO);
-                return new Response
-                {
-                    Success = true,
-                    Message = "SO updated successfully",
-                    Error = null
-                };
+                return new Response { Success = false, Message = "Unauthorize cradential" };
             }
             catch
             {
