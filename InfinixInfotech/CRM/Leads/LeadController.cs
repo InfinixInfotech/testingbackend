@@ -24,7 +24,7 @@ namespace InfinixInfotech.CRM.Leads
         [HttpPost]
         [Route("AddLead")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> AddLead([FromBody] Lead model)
+        public async Task<IActionResult> AddLead([FromForm] Lead model)
         {
             var grpName = await _homeController.GetGroupName();
             var response = await _leadService.AddLead(model, grpName);
@@ -42,7 +42,7 @@ namespace InfinixInfotech.CRM.Leads
         [HttpPut]
         [Route("UpdateLeadById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> UpdateLeadById([FromBody] Lead model)
+        public async Task<IActionResult> UpdateLeadById([FromForm] Lead model)
         {
             var grpName = await _homeController.GetGroupName();
             var response = await _leadService.UpdateLeadById(model, grpName);

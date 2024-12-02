@@ -19,7 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("InsertGroups")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> InsertGroups([FromBody] Groups model)
+        public async Task<IActionResult> InsertGroups([FromForm] Groups model)
         {
             var response = await _groupsService.InsertAsync(model);
             return StatusCode(response.Success ? 200 : 500, response);
@@ -28,7 +28,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateByIdGroups")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateByIdGroups([FromBody] Groups model)
+        public async Task<IActionResult> UpdateByIdGroups([FromForm] Groups model)
         {
             var response = await _groupsService.UpdateByIdAsync(model);
             return StatusCode(response.Success ? 200 : 500, response);

@@ -19,7 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("CreateDepartmentAsync")]
         [Authorize(Policy ="admin")]
-        public async Task<IActionResult> CreateDepartmentAsync([FromBody] Department department)
+        public async Task<IActionResult> CreateDepartmentAsync([FromForm] Department department)
         {
             var response = await _departmentService.CreateDepartmentAsync(department);
             if (response.Success)
@@ -32,7 +32,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateDepartmentAsync")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateDepartmentAsync([FromBody] Department department)
+        public async Task<IActionResult> UpdateDepartmentAsync([FromForm] Department department)
         {
             var response = await _departmentService.UpdateDepartmentAsync( department);
             if (response.Success)
