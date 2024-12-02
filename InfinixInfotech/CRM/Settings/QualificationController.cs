@@ -19,7 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("InsertQualificationAsync")]
         [Authorize (Policy = "admin")]
-        public async Task<IActionResult> InsertQualificationAsync([FromBody] Qualification qualification)
+        public async Task<IActionResult> InsertQualificationAsync([FromForm] Qualification qualification)
         {
             var response = await _service.InsertQualificationAsync(qualification);
             return Ok(response);
@@ -28,7 +28,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateQualificationByIdAsync")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateQualificationByIdAsync([FromBody] Qualification qualification)
+        public async Task<IActionResult> UpdateQualificationByIdAsync([FromForm] Qualification qualification)
         {
             var response = await _service.UpdateQualificationByIdAsync(qualification);
             return Ok(response);

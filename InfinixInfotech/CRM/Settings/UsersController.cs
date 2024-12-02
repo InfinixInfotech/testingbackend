@@ -19,7 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("AddUsers")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> AddUsers([FromBody] Users model)
+        public async Task<IActionResult> AddUsers([FromForm] Users model)
         {
             var response = await _usersService.AddUsers(model);
             return StatusCode(response.Success ? 200 : 500, response);
@@ -27,7 +27,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateUsersById")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateUsersById([FromBody] Users model)
+        public async Task<IActionResult> UpdateUsersById([FromForm] Users model)
         {
             var response = await _usersService.UpdateUsersById(model);
             return StatusCode(response.Success ? 200 : 500, response);

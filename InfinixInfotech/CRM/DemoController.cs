@@ -58,7 +58,7 @@ namespace InfinixInfotech.CRM
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add([FromBody] Demos demo)
+        public async Task<ActionResult> Add([FromForm] Demos demo)
         {
             await _service.AddAsync(demo);
             return CreatedAtAction(nameof(GetById), new { id = demo.Id }, demo);

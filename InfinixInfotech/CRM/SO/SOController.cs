@@ -33,7 +33,7 @@ namespace InfinixInfotech.CRM.SO
         [HttpPost]
         [Route("InsertSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> InsertSO([FromBody] So sO)
+        public async Task<IActionResult> InsertSO([FromForm] So sO)
         {
             var grpName = await _homeController.GetGroupName();
             var response = await _sOService.InsertSO(sO, grpName);
@@ -43,7 +43,7 @@ namespace InfinixInfotech.CRM.SO
         [HttpPut]
         [Route("UpdateSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> UpdateSO([FromBody] So sO)
+        public async Task<IActionResult> UpdateSO([FromForm] So sO)
         {
             var grpName = await _homeController.GetGroupName();
             var response = await _sOService.UpdateSO(sO, grpName);

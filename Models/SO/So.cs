@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Models.Common;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +31,9 @@ public class PersonalDetails
     public string MotherName { get; set; }
     public string Mobile { get; set; }
     public string Email { get; set; }
-    public string Dob { get; set; }
+    [BsonElement("Dob")]
+    [BsonSerializer(typeof(CustomDateTimeSerializer))]
+    public DateTime Dob { get; set; }
     public Address Address { get; set; }
     public string Aadhar { get; set; }
     public string PanNo { get; set; }
@@ -46,7 +50,9 @@ public class Address
 
 public class _PaymentDetails
 {
-    public string PaymentDate { get; set; }
+    [BsonElement("PaymentDate")]
+    [BsonSerializer(typeof(CustomDateTimeSerializer))]
+    public DateTime PaymentDate { get; set; }
     public string ModeOfPayment { get; set; }
     public string BankName { get; set; }
     public string PaymentGateway { get; set; }
@@ -65,8 +71,12 @@ public class BusinessDetails
 public class _ProductDetails
 {
     public string Product { get; set; }
-    public string StartDate { get; set; }
-    public string EndDate { get; set; }
+    [BsonElement("StartDate")]
+    [BsonSerializer(typeof(CustomDateTimeSerializer))]
+    public DateTime StartDate { get; set; }
+    [BsonElement("EndDate")]
+    [BsonSerializer(typeof(CustomDateTimeSerializer))]
+    public DateTime EndDate { get; set; }
     public decimal GrandTotal { get; set; }
     public decimal? Remaining { get; set; }
     public decimal? Discount { get; set; }

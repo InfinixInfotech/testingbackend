@@ -30,7 +30,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("InsertLeadStatus")]
         [Authorize(Policy = ("admin"))]
-        public async Task<IActionResult> InsertLeadStatus([FromBody] LeadStatus leadStatus)
+        public async Task<IActionResult> InsertLeadStatus([FromForm] LeadStatus leadStatus)
         {
             var response = await _leadStatusService.InsertAsync(leadStatus);
             return response.Success ? Ok(response) : BadRequest(response);
@@ -39,7 +39,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateLeadStatus")]
         [Authorize(Policy = ("admin"))]
-        public async Task<IActionResult> UpdateLeadStatus([FromBody] LeadStatus leadStatus)
+        public async Task<IActionResult> UpdateLeadStatus([FromForm] LeadStatus leadStatus)
         {
             var response = await _leadStatusService.UpdateAsync(leadStatus);
             return response.Success ? Ok(response) : BadRequest(response);
