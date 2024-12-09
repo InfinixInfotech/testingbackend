@@ -11,6 +11,8 @@ namespace Repository.Settings.IClass
         Task<Users> GetUserById(int id);
         Task<Users> GetUserByUserNameAsync(string userName);
         Task<userresponseData> GetUserDetailsByUsername(string username);
+        Task<List<Users>> GetAllUserDetailsByGroupName(string groupName);
         Task<List<EmployeeDetails>> GetAllEmployeeCodeEmployeeNameByGroupName(string groupName);
+        List<string> GetEmployeeCredentialsByGroupName(string groupName);
     }
 }

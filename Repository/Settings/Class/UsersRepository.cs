@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using Repository.Common;
 using Repository.Settings.IClass;
+using System.Text.RegularExpressions;
 
 namespace Repository.Settings.Class
 {
@@ -32,6 +33,15 @@ namespace Repository.Settings.Class
         {
             return await _collection.Find(_ => true).ToListAsync();
         }
+        public List<string> GetEmployeeCredentialsByGroupName(string groupName)
+        {
+            var filter = Builders<Users>.Filter.Eq(e => e.GroupName, groupName);
+            var employees = _collection.Find(filter).ToList();
+            return employees.Select(e => e.EmployeeCode).ToList();
+        }
+
+
+
         public async Task<Users> GetUserById(int id)
         {
             return await _collection.Find(user => user.Id == id).FirstOrDefaultAsync();

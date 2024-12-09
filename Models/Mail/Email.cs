@@ -11,13 +11,13 @@ namespace Models.Mail
 {
     public class Email
     {
-        public string apiType { get; set; }
-        public string accessType { get; set; }
+       
         public int Id { get; set; }
         public List<string> To { get; set; }
         public string From { get; set; }
         public List<string> CC { get; set; }
         public List<string> BCC { get; set; }
+        public List<string> EmployeeCode { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
         public List<FileContent>? Attachment { get; set; }

@@ -25,20 +25,19 @@ namespace InfinixInfotech.CRM.Mail
         }
         [HttpPost]
         [Route("AddSMS")]
-        [Authorize(Policy = "AdminOrUser")]
+        //[Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> AddSMS([FromForm] SMS model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sMSService.AddSMS(model, grpName);
+            
+            var response = await _sMSService.AddSMS(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetSMSById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetSMSById(int id, string apiType, string accessType)
+        public async Task<IActionResult> GetSMSById(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sMSService.GetSMSById(id, apiType, accessType, grpName);
+            var response = await _sMSService.GetSMSById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpPut]
@@ -46,27 +45,39 @@ namespace InfinixInfotech.CRM.Mail
         [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> UpdateSMSById([FromForm] Email model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sMSService.UpdateSMSById(model, grpName);
+
+            var response = await _sMSService.UpdateSMSById(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpDelete]
         [Route("DeleteSMSById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> DeleteSMSById(int id, string apiType, string accessType)
+        public async Task<IActionResult> DeleteSMSById(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sMSService.DeleteSMSById(id, apiType, accessType, grpName);
+            var response = await _sMSService.DeleteSMSById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetAllSMS")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetAllSMS (string apiType, string accessType)
+        public async Task<IActionResult> GetAllSMS ()
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sMSService.GetAllSMS(apiType, accessType, grpName);
+            var response = await _sMSService.GetAllSMS();
             return StatusCode(response.Success ? 200 : 500, response);
+        }
+        [HttpGet("GetAllSMSByEmployeeCode")]
+        public async Task<IActionResult> GetAllSMSByEmployeeCode(string employeeCode)
+        {
+            var response = await _sMSService.GetAllSMSByEmployeeCode(employeeCode);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return BadRequest(response);
+            }
         }
     }
 }

@@ -10,10 +10,11 @@ namespace Services.Mail.IClass
 {
     public interface ISMSService
     {
-        Task<Response> AddSMS(SMS sMS, string groupName);
-        Task<Response> GetSMSById(int id, string apiType, string accessType, string groupName);
-        Task<Response> UpdateSMSById(Email model, string groupName);
-        Task<Response> GetAllSMS(string apiType, string accessType, string groupName);
-        Task<Response> DeleteSMSById(int id, string apiType, string accessType, string groupName);
+        Task<Response> AddSMS(SMS sms);
+        Task<Response> GetSMSById(int id);
+        Task<Response> UpdateSMSById(Email model);
+        Task<Response> GetAllSMS();
+        Task<Response> DeleteSMSById(int id);
+        Task<Response> GetAllSMSByEmployeeCode(string employeeCode);
     }
 }

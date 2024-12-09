@@ -14,6 +14,7 @@ namespace Repository.Mail.IClass
         Task<List<Email>> GetAllSMS();
         Task UpdateSMSById(Email model);
         Task<Email> GetSMSById(int id);
+        Task<List<Email>> GetAllSMSByEmployeeCode(string employeeCode);
 
     }
 }

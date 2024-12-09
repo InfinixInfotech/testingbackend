@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.Leads;
 using Models.Mail;
+using Models.Settings;
 using MongoDB.Driver;
 using Repository.Common;
 using Repository.Mail.IClass;
@@ -40,6 +41,24 @@ namespace Repository.Mail.Class
         {
             var result = await _collection.DeleteOneAsync(user => user.Id == id);
             return result.DeletedCount > 0;
+        }
+        public async Task<List<Email>> GetAllSMSByEmployeeCode(string employeeCode)
+        {
+            var filter = Builders<Email>.Filter.Regex(email => email.EmployeeCode, new MongoDB.Bson.BsonRegularExpression(employeeCode, "i"));
+            var sort = Builders<Email>.Sort.Descending(email => email.Id);
+            var emails = await _collection.Find(filter).Sort(sort).ToListAsync();
+
+            var result = emails.Select(email => new Email
+            {
+                Id = email.Id,
+                Subject = email.Subject,
+                Message = email.Message,
+                Attachment = email.Attachment,
+                CreateDate = email.CreateDate,
+                CreateTime = email.CreateTime,  
+            }).ToList();
+
+            return result;
         }
     }
 }
