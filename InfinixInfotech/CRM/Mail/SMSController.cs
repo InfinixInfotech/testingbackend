@@ -16,16 +16,14 @@ namespace InfinixInfotech.CRM.Mail
     public class SMSController : ControllerBase
     {
         private readonly ISMSService _sMSService;
-        private readonly HomeController _homeController;
-        public SMSController(ISMSService sMSService, HomeController homeController)
+        public SMSController(ISMSService sMSService)
         {
             _sMSService = sMSService;
-            _homeController = homeController;
 
         }
         [HttpPost]
         [Route("AddSMS")]
-        //[Authorize(Policy = "AdminOrUser")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> AddSMS([FromForm] SMS model)
         {
             
@@ -66,9 +64,25 @@ namespace InfinixInfotech.CRM.Mail
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet("GetAllSMSByEmployeeCode")]
+        [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> GetAllSMSByEmployeeCode(string employeeCode)
         {
             var response = await _sMSService.GetAllSMSByEmployeeCode(employeeCode);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return BadRequest(response);
+            }
+        }
+        [HttpGet("GetAllSMSByisImportant")]
+        [Authorize(Policy = "AdminOrUser")]
+        public async Task<IActionResult> GetAllSMSByisImportant(bool isimportant)
+        {
+            var response = await _sMSService.GetAllSMSByisImportant(isimportant);
 
             if (response.Success)
             {

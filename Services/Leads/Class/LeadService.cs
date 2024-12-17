@@ -166,7 +166,7 @@ namespace Services.Leads.Class
         public async Task<string> GetNextIdentifierAsync()
         {
             long nextIdNumber = _sequenceGenerator.GetNextSequence("Demo_LeadNo", "LeadNo");
-            var nextId = $"LED{nextIdNumber:D2}";
+            var nextId = $"LEAD{nextIdNumber:D2}";
             await _identifierService.InsertIdentifierAsync(new InfinixId { Id = nextId });
 
             return nextId;

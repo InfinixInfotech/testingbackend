@@ -18,7 +18,7 @@ namespace InfinixInfotech.CRM.Login
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromForm] LoginData loginData)
+        public async Task<IActionResult> Login([FromBody] LoginData loginData)
         {
             var response = await _authService.LoginAsync(loginData);
             

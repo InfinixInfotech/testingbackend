@@ -99,6 +99,10 @@ namespace Services.Mail.Class
                     Attachment = ProcessFileContents(sms.Attachment),
                     CreateDate = sms.CreateDate,
                     CreateTime = sms.CreateTime,
+                    isImportant = sms.isImportant,
+                    Templatetype = sms.Templatetype,
+                    PdfFiles = ProcessFileContents(sms.PdfFiles),
+                    PhotoFiles = ProcessFileContents(sms.PhotoFiles),
                 };
                 await _sMSRepository.AddSMS(email);
 
@@ -243,6 +247,42 @@ namespace Services.Mail.Class
                         ContentType = a.ContentType,
                         FileData = a.FileData 
                     }).ToList()
+                }).ToList();
+
+
+                return new Response
+                {
+                    Success = true,
+                    Message = "Messages retrieved successfully.",
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    Success = false,
+                    Message = "An error occurred while fetching messages.",
+                    Error = ex.Message
+                };
+            }
+        }
+        public async Task<Response> GetAllSMSByisImportant(bool isimportant)
+        {
+            try
+            {
+                // Call the repository to get emails by employee code
+                var emails = await _sMSRepository.GetAllSMSByisImportant(isimportant);
+
+                var result = emails.Select(email => new
+                {
+                    email.Id,
+                    email.Subject,
+                    email.To,
+                    email.From,
+                    email.CreateDate,
+                    email.CreateTime,
+                    email.Templatetype,
                 }).ToList();
 
 

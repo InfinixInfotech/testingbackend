@@ -60,5 +60,23 @@ namespace Repository.Mail.Class
 
             return result;
         }
+        public async Task<List<Email>> GetAllSMSByisImportant(bool isImportant)
+        {
+            var filter = Builders<Email>.Filter.Eq(email => email.isImportant, isImportant);
+            var sort = Builders<Email>.Sort.Descending(email => email.Id);
+            var emails = await _collection.Find(filter).Sort(sort).ToListAsync();
+            var result = emails.Select(email => new Email
+            {
+                Id = email.Id,
+                Subject = email.Subject,
+                To = email.To,
+                From = email.From,
+                CreateDate = email.CreateDate, // Format as "17-12-2024"
+                CreateTime = email.CreateTime,
+                Templatetype = email.Templatetype,
+            }).ToList();
+
+            return result;
+        }
     }
 }

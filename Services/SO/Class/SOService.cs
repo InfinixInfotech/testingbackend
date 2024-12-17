@@ -33,11 +33,9 @@ namespace Services.SO.Class
             _identifierService = identifierService;
             _groupsRepository = groupsRepository;
         }
-        public async Task<Response> GetAllSO(string apitype , string accessType,string groupName)
+        public async Task<Response> GetAllSO()
         {
-            var isAccessType = await _groupsRepository.GetAccessKey(apitype, accessType, groupName);
-            if (isAccessType == true)
-            {
+           
                 var data = await _repository.GetAllSO();
                 return new Response
                 {
@@ -46,27 +44,15 @@ namespace Services.SO.Class
                     Error = null,
                     Data = data
 
-                };
-            }
-            else
-            {
-                return new Response
-                {
-                    Success = false,
-                    Message = "Unauthorize cradential",
-                    Error = null,
-                };
-            }
+                };                      
         }
 
-        public async Task<Response> InsertSO(So sO, string groupName)
+        public async Task<Response> InsertSO(So sO)
         {
             try
             {
                 
-                var isAccessType = await _groupsRepository.GetAccessKey(sO.apiType, sO.accessType, groupName);
-                if (isAccessType == true)
-                {
+               
                     sO.Id = _sequenceGenerator.GetNextSequence("Demo_lead", "Demolead  _Sequence");
                     sO.SoId = await GetNextIdentifierAsync();
                     if (sO == null || string.IsNullOrEmpty(sO.EmployeeCode))
@@ -78,11 +64,7 @@ namespace Services.SO.Class
                             Message = null
                         };
                     }
-                }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+               
 
                 await _repository.InsertSO(sO);
                 return new Response
@@ -99,13 +81,11 @@ namespace Services.SO.Class
         }
              
 
-        public async Task<Response> UpdateSO(So sO, string groupName)
+        public async Task<Response> UpdateSO(So sO)
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(sO.apiType, sO.accessType, groupName);
-                if (isAccessType == true)
-                {
+                
                     var existing = await _repository.GetByIdAsync(sO.Id);
                     if (existing != null)
                     {
@@ -116,11 +96,7 @@ namespace Services.SO.Class
                             Message = "SO updated successfully",
                             Error = null
                         };
-                    }
-                    else
-                    {
-                        return new Response { Success = false, Message = "Unauthorize cradential" };
-                    }
+                   
                 }
                 return new Response { Success = false, Message = "Unauthorize cradential" };
             }
@@ -130,14 +106,12 @@ namespace Services.SO.Class
             }
          }
 
-        public async Task<Response> DeleteSO(int id, string apiType, string accessType, string groupName)
+        public async Task<Response> DeleteSO(int id)
         {
 
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(apiType, accessType, groupName);
-                if (isAccessType == true)
-                {
+               
                     var existing = await _repository.GetByIdAsync(id);
                     if (existing == null)
                     {
@@ -155,11 +129,7 @@ namespace Services.SO.Class
                         Message = "LeadStatus deleted successfully",
                         Error = null
                     };
-                }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+               
             }
             catch
             {
@@ -169,24 +139,18 @@ namespace Services.SO.Class
         }            
         
             
-        public async Task<Response> GetSOById(int id, string apiType, string accessType, string groupName)
+        public async Task<Response> GetSOById(int id)
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(apiType, accessType, groupName);
-                if (isAccessType == true)
-                {
+               
                     var user = await _repository.GetByIdAsync(id);
                     if (user == null)
                     {
                         return new Response { Success = false, Error = "Lead Status not found." };
                     }
                     return new Response { Success = true, Data = user };
-                }
-                else
-                {
-                    return new Response { Success = false, Error = "Unauthorize cradential" };
-                }
+               
                 
 
             }

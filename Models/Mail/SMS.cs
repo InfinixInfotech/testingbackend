@@ -11,7 +11,6 @@ namespace Models.Mail
 {
     public class SMS
     {
-     
         public List<string> To { get; set; }
         public string From { get; set; }
         public List<string> CC { get; set; }
@@ -26,5 +25,15 @@ namespace Models.Mail
         [BsonElement("CreateTime")]
         [BsonSerializer(typeof(CustomTimeSerializer))]
         public DateTime CreateTime { get; set; }
+        public bool isImportant {  get; set; } = false;
+        public string Templatetype { get; set; }    
+        public List<IFormFile> PdfFiles { get; set; } 
+        public List<IFormFile> PhotoFiles { get; set; } 
+        public SMS()
+        {
+            PdfFiles = new List<IFormFile>();
+            PhotoFiles = new List<IFormFile>();
+        }
+
     }
 }

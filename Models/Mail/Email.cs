@@ -27,5 +27,14 @@ namespace Models.Mail
         [BsonElement("CreateTime")]
         [BsonSerializer(typeof(CustomTimeSerializer))]
         public DateTime CreateTime { get; set; }
+        public bool isImportant { get; set; }
+        public string Templatetype { get; set; }
+        public List<FileContent> PdfFiles { get; set; }
+        public List<FileContent> PhotoFiles { get; set; }
+        public Email()
+        {
+            PdfFiles = new List<FileContent>();
+            PhotoFiles = new List<FileContent>();
+        }
     }
 }

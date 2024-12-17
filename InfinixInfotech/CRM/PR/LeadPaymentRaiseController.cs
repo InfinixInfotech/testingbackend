@@ -25,17 +25,17 @@ namespace InfinixInfotech.CRM.PR
        
         public async Task<IActionResult> AddLeadPR([FromBody] PaymentRaise model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _paymentRaise.LeadPR(model, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _paymentRaise.LeadPR(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetLeadPRById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetLeadPRById(int id, string apiType, string accessType)
+        public async Task<IActionResult> GetLeadPRById(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _paymentRaise.GetLeadPRById(id, apiType, accessType, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _paymentRaise.GetLeadPRById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpPut]
@@ -43,26 +43,26 @@ namespace InfinixInfotech.CRM.PR
         [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> UpdateLeadPRById([FromBody] PaymentRaise model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _paymentRaise.UpdateLeadPRById(model, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _paymentRaise.UpdateLeadPRById(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpDelete]
         [Route("DeleteLeadPRById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> DeleteLeadPRById(int id, string apiType, string accessType)
+        public async Task<IActionResult> DeleteLeadPRById(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _paymentRaise.DeleteLeadPRById(id, apiType, accessType, grpName);
+           // var grpName = await _homeController.GetGroupName();
+            var response = await _paymentRaise.DeleteLeadPRById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetAllLeadPR")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetAllLeadPR(string apiType, string accessType)
+        public async Task<IActionResult> GetAllLeadPR()
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _paymentRaise.GetAllLeadPR(apiType, accessType, grpName);
+           // var grpName = await _homeController.GetGroupName();
+            var response = await _paymentRaise.GetAllLeadPR();
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

@@ -23,49 +23,49 @@ namespace InfinixInfotech.CRM.SO
         [HttpGet]
         [Route("GetAllSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> GetAllSO(string apiType, string accessType)
+        public async Task<IActionResult> GetAllSO()
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sOService.GetAllSO(apiType, accessType, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _sOService.GetAllSO();
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
         [HttpPost]
         [Route("InsertSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> InsertSO([FromForm] So sO)
+        public async Task<IActionResult> InsertSO([FromBody] So sO)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sOService.InsertSO(sO, grpName);
+           // var grpName = await _homeController.GetGroupName();
+            var response = await _sOService.InsertSO(sO);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
         [HttpPut]
         [Route("UpdateSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> UpdateSO([FromForm] So sO)
+        public async Task<IActionResult> UpdateSO([FromBody] So sO)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sOService.UpdateSO(sO, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _sOService.UpdateSO(sO);
             return response.Success ? Ok(response) : BadRequest(response);
         }
 
         [HttpDelete]
         [Route("DeleteSO")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> DeleteSO(int id, string apiType, string accessType)
+        public async Task<IActionResult> DeleteSO(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sOService.DeleteSO(id, apiType, accessType, grpName);
+            //var grpName = await _homeController.GetGroupName();
+            var response = await _sOService.DeleteSO(id);
             return response.Success ? Ok(response) : BadRequest(response);
         }
         [HttpGet]
         [Route("GetSOById")]
         [Authorize(Policy = ("AdminOrUser"))]
-        public async Task<IActionResult> GetSOById(int id, string apiType, string accessType)
+        public async Task<IActionResult> GetSOById(int id)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _sOService.GetSOById(id, apiType, accessType, grpName);
+           // var grpName = await _homeController.GetGroupName();
+            var response = await _sOService.GetSOById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

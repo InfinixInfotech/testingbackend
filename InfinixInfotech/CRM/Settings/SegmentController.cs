@@ -19,7 +19,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPost]
         [Route("InsertSegmentAsync")]
         [Authorize(Policy ="admin")]
-        public async Task<IActionResult> InsertSegmentAsync([FromForm] Segment segment)
+        public async Task<IActionResult> InsertSegmentAsync([FromBody] Segment segment)
         {
             var response = await _segmentService.InsertSegmentAsync(segment);
             return Ok(response);
@@ -28,7 +28,7 @@ namespace InfinixInfotech.CRM.Settings
         [HttpPut]
         [Route("UpdateSegmentByIdAsync")]
         [Authorize(Policy = "admin")]
-        public async Task<IActionResult> UpdateSegmentByIdAsync([FromForm] Segment segment)
+        public async Task<IActionResult> UpdateSegmentByIdAsync([FromBody] Segment segment)
         {
             var response = await _segmentService.UpdateSegmentByIdAsync(segment);
             return Ok(response);

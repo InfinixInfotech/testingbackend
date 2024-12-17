@@ -11,11 +11,11 @@ namespace Services.SO.IClass
     public interface ISOService
     {
 
-        Task<Response> InsertSO(So sO, string groupName);
-        Task<Response> UpdateSO(So sO, string groupName);
-        Task<Response> DeleteSO(int id, string apiType, string accessType, string groupName);
-        Task<Response> GetSOById(int id, string apiType, string accessType, string groupName);
-        Task<Response> GetAllSO(string apitype, string accessType, string groupName);
+        Task<Response> InsertSO(So sO);
+        Task<Response> UpdateSO(So sO);
+        Task<Response> DeleteSO(int id);
+        Task<Response> GetSOById(int id);
+        Task<Response> GetAllSO();
 
         }
 }
