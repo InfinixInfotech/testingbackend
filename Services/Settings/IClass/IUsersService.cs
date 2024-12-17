@@ -9,5 +9,6 @@ namespace Services.Settings.IClass
         Task<Response> UpdateUsersById(Users model);
         Task<Response> GetAllUsers();
         Task<Response> GetUserById(int id);
+        Task<Response> GetAllEmployeeCodeAndName();
     }
 }

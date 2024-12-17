@@ -101,5 +101,25 @@ namespace Services.Settings.Class
 
             return nextId;
         }
+        public async Task<Response> GetAllGroupNameAndID()
+        {
+            try
+            {
+                var users = await _groupsRepository.GetAllGroupNameAndID();
+
+                // Map Users to GetUsers
+                var data = users.Select(user => new GroupDetails
+                {
+                    GroupId = user.GroupId,
+                    GroupName = user.GroupName,
+                }).ToList();
+
+                return new Response { Success = true, Data = data };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
     }
 }

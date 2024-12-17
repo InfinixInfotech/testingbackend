@@ -15,5 +15,6 @@ namespace Services.Settings.IClass
         Task<Response> DeleteByIdAsync(int id);
         Task<Response> GetAllAsync();
         Task<Response> GetGroupsById(int id);
+        Task<Response> GetAllGroupNameAndID();
     }
 }

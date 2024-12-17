@@ -97,8 +97,8 @@ namespace Services.Mail.Class
                     Subject = sms.Subject,
                     Message = sms.Message,
                     Attachment = ProcessFileContents(sms.Attachment),
-                    CreateDate = sms.CreateDate,
-                    CreateTime = sms.CreateTime,
+                    CreateDate = DateTime.Now.ToString("dd-MM-yyyy"),
+                    CreateTime = DateTime.Now.ToString("hh:mm tt"),
                     isImportant = sms.isImportant,
                     Templatetype = sms.Templatetype,
                     PdfFiles = ProcessFileContents(sms.PdfFiles),
@@ -208,13 +208,13 @@ namespace Services.Mail.Class
         }
         private async Task<List<string>> GetRecipientList(string recipient)
         {
-            if (recipient.Contains("INF"))
+            if (recipient.Contains("INF") && recipient.Length >= 9)
             {
                 return new List<string> { recipient };
             }
             else
             {
-                return  _usersRepository.GetEmployeeCredentialsByGroupName(recipient);
+                return  _usersRepository.GetEmployeeCredentialsByGroupId(recipient);
             }
         }
         public async Task<Response> GetAllSMSByEmployeeCode(string employeeCode)

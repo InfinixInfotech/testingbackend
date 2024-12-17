@@ -98,8 +98,7 @@ namespace Services.Settings.Class
             {
                 return new Response { Success = false, Error = ex.Message };
             }
-        }
-
+        } 
         public async Task<Response> GetUserById(int id)
         {
             try
@@ -110,6 +109,26 @@ namespace Services.Settings.Class
                     return new Response { Success = false, Error = "User not found." };
                 }
                 return new Response { Success = true, Data = user };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
+        public async Task<Response> GetAllEmployeeCodeAndName()
+        {
+            try
+            {
+                var users = await _usersRepository.GetAllEmployeeCodeAndName();
+
+                // Map Users to GetUsers
+                var data = users.Select(user => new EmployeeDetails
+                {
+                    EmployeeName = user.EmployeeName,
+                    EmployeeCode = user.EmployeeCode,                  
+                }).ToList();
+
+                return new Response { Success = true, Data = data };
             }
             catch (Exception ex)
             {

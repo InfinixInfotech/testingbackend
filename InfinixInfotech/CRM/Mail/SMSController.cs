@@ -7,6 +7,7 @@ using Models.Mail;
 using Services.Leads.Class;
 using Services.Leads.IClass;
 using Services.Mail.IClass;
+using Services.Settings.IClass;
 using Services.SO.IClass;
 
 namespace InfinixInfotech.CRM.Mail
@@ -16,10 +17,13 @@ namespace InfinixInfotech.CRM.Mail
     public class SMSController : ControllerBase
     {
         private readonly ISMSService _sMSService;
-        public SMSController(ISMSService sMSService)
+        private readonly IUsersService _usersService;
+        private readonly IGroupsService _groupsService;
+        public SMSController(ISMSService sMSService, IUsersService usersService,IGroupsService groupsService)
         {
             _sMSService = sMSService;
-
+            _usersService = usersService;
+            _groupsService = groupsService;
         }
         [HttpPost]
         [Route("AddSMS")]
@@ -92,6 +96,22 @@ namespace InfinixInfotech.CRM.Mail
             {
                 return BadRequest(response);
             }
+        }
+        [HttpGet]
+        [Route("GetAllEmployeeCodeAndName")]
+        [Authorize(Policy = "AdminOrUser")]
+        public async Task<IActionResult> GetAllEmployeeCodeAndName()
+        {
+            var response = await _usersService.GetAllEmployeeCodeAndName();
+            return StatusCode(response.Success ? 200 : 500, response);
+        } 
+        [HttpGet]
+        [Route("GetAllGroupNameAndID")]
+        [Authorize(Policy = "AdminOrUser")]
+        public async Task<IActionResult> GetAllGroupNameAndID()
+        {
+            var response = await _groupsService.GetAllGroupNameAndID();
+            return StatusCode(response.Success ? 200 : 500, response);
         }
     }
 }

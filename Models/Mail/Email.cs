@@ -11,7 +11,8 @@ namespace Models.Mail
 {
     public class Email
     {
-       
+        private string _createDate;
+
         public int Id { get; set; }
         public List<string> To { get; set; }
         public string From { get; set; }
@@ -21,12 +22,18 @@ namespace Models.Mail
         public string Subject { get; set; }
         public string Message { get; set; }
         public List<FileContent>? Attachment { get; set; }
-        [BsonElement("CreateDate")]
-        [BsonSerializer(typeof(CustomDateTimeSerializer))]
-        public DateTime CreateDate { get; set; }
-        [BsonElement("CreateTime")]
-        [BsonSerializer(typeof(CustomTimeSerializer))]
-        public DateTime CreateTime { get; set; }
+        public string CreateDate
+        {
+            get => _createDate ?? DateTimeHelper.GetPresentDate();
+            set => _createDate = value;
+        }
+
+        private string _createTime;
+        public string CreateTime
+        {
+            get => _createTime ?? DateTimeHelper.GetPresentTime();
+            set => _createTime = value;
+        }
         public bool isImportant { get; set; }
         public string Templatetype { get; set; }
         public List<FileContent> PdfFiles { get; set; }

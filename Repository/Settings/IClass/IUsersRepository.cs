@@ -8,11 +8,12 @@ namespace Repository.Settings.IClass
         Task<string> GeEmpCode(string mobile);
         Task UpdateUsersById(Users model);
         Task<List<Users>> GetAllUsers();
+        Task<List<EmployeeDetails>> GetAllEmployeeCodeAndName();
         Task<Users> GetUserById(int id);
         Task<Users> GetUserByUserNameAsync(string userName);
         Task<userresponseData> GetUserDetailsByUsername(string username);
         Task<List<Users>> GetAllUserDetailsByGroupName(string groupName);
         Task<List<EmployeeDetails>> GetAllEmployeeCodeEmployeeNameByGroupName(string groupName);
-        List<string> GetEmployeeCredentialsByGroupName(string groupName);
+        List<string> GetEmployeeCredentialsByGroupId(string groupId);
     }
 }

@@ -32,10 +32,11 @@ namespace Repository.Settings.Class
         public async Task<List<Users>> GetAllUsers()
         {
             return await _collection.Find(_ => true).ToListAsync();
-        }
-        public List<string> GetEmployeeCredentialsByGroupName(string groupName)
+        } 
+       
+        public List<string> GetEmployeeCredentialsByGroupId(string groupId)
         {
-            var filter = Builders<Users>.Filter.Eq(e => e.GroupName, groupName);
+            var filter = Builders<Users>.Filter.Eq(e => e.GroupId, groupId);
             var employees = _collection.Find(filter).ToList();
             return employees.Select(e => e.EmployeeCode).ToList();
         }
@@ -87,7 +88,19 @@ namespace Repository.Settings.Class
 
             return employeeDetails;
         }
+        public async Task<List<EmployeeDetails>> GetAllEmployeeCodeAndName()
+        {
+            var employeeDetails = await _collection
+             .Find(_ => true) // No filter, fetch all records
+             .Project(user => new EmployeeDetails
+             {
+                 EmployeeCode = user.EmployeeCode, // Employee code
+                 EmployeeName = user.FullName     // Full name
+             })
+             .ToListAsync();
 
+            return employeeDetails;
+        }
 
     }
 }

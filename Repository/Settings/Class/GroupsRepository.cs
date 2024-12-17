@@ -79,6 +79,18 @@ namespace Repository.Settings.Class
                 .FirstOrDefaultAsync();
             return group?.GroupName;
         }
+        public async Task<List<GroupDetails>> GetAllGroupNameAndID()
+        {
+            var employeeDetails = await _admincollection
+             .Find(_ => true) // No filter, fetch all records
+             .Project(user => new GroupDetails
+             {
+                 GroupId = user.GroupId, 
+                 GroupName = user.GroupName,
+             })
+             .ToListAsync();
 
+            return employeeDetails;
+        }
     }
 }
