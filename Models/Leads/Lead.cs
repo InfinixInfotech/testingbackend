@@ -25,9 +25,7 @@ namespace Models.Leads
         public string Email { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        [BsonElement("Dob")]
-        [BsonSerializer(typeof(CustomDateTimeSerializer))]
-        public DateTime Dob { get; set; }
+        public string Dob { get; set; }
         public InvestmentDetail InvestmentDetail { get; set; }
         public string Language { get; set; }
         public FollowupDetail FollowupDetail { get; set; }
@@ -54,15 +52,9 @@ public class FollowupDetail
 {
     public string LeadStatus { get; set; }
     public string Segment { get; set; }
-    [BsonElement("FreeTrialStartDate")]
-    [BsonSerializer(typeof(CustomDateTimeSerializer))]
-    public DateTime FreeTrialStartDate { get; set; }
-    [BsonElement("FreeTrialEndDate")]
-    [BsonSerializer(typeof(CustomDateTimeSerializer))]
-    public DateTime FreeTrialEndDate { get; set; }
-    [BsonElement("FollowUpDate")]
-    [BsonSerializer(typeof(CustomDateTimeSerializer))]
-    public DateTime FollowUpDate { get; set; }
+    public string FreeTrialStartDate { get; set; }
+    public string FreeTrialEndDate { get; set; }
+    public string FollowUpDate { get; set; }
     public string Comment { get; set; }
 }
 

@@ -38,10 +38,8 @@ namespace Models.Settings
         public List<string> CustomFetch { get; set; }
         public string CustomFetchRatio { get; set; }
         public int OTPNumber { get; set; }
-        [BsonElement("DateOfBirth")]
-        [BsonSerializer(typeof(CustomDateTimeSerializer))]
-        public DateTime DateOfBirth { get; set; }
-        public DateTime DateOfJoining { get; set; }
+        public string DateOfBirth { get; set; }
+        public string DateOfJoining { get; set; }
         public string Branch { get; set; }
         public string PanNumber { get; set; }
         public string AadharNumber { get; set; }

@@ -22,9 +22,7 @@ namespace Models.Leads
         public string Email { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        [BsonElement("Dob")]
-        [BsonSerializer(typeof(CustomDateTimeSerializer))]
-        public DateTime Dob { get; set; }
+        public string Dob { get; set; }
         public string Language { get; set; }
         public FollowupDetail FollowupDetail { get; set; }
     }
