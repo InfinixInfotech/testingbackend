@@ -52,12 +52,24 @@ namespace Services.Settings.Class
         {
             string firstName = users.FullName?.Split(' ')[0].ToLower();
             string abc = firstName.ToUpper();
-            string dayPart = users.DateOfBirth.ToString("dd");
+            string dayPart = string.Empty;
+
+            // Assuming DateOfBirth is a string in a known format, e.g., "dd-MM-yyyy"
+            if (DateTime.TryParseExact(users.DateOfBirth, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dob))
+            {
+                dayPart = dob.ToString("dd");  // Extract day part from DateTime
+            }
+            else
+            {
+                // Handle invalid DateOfBirth format if needed
+                dayPart = "Invalid Date"; // or handle accordingly
+            }
+
             return $"{abc}{dayPart}";
         }
 
         public async Task<Response> UpdateUsersById(Users model)
-        {
+        {   
             try
             {
                 await _usersRepository.UpdateUsersById(model);
