@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Repository.BulkLead.Class;
+using Repository.BulkLead.IClass;
 using Repository.Common;
 using Repository.Demo.Class;
 using Repository.Demo.IClass;
@@ -38,6 +40,7 @@ namespace Repository
             services.AddScoped<IIdentifierService, IdentifierService>();
             services.AddScoped<ISORepository, SORepository>();
             services.AddScoped<ISMSRepository, SMSRepository>();
+            services.AddScoped<IBulkLeadRepository, BulkLeadRepository>();
 
 
         }

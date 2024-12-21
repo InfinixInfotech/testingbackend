@@ -20,9 +20,9 @@ namespace Services.Login.Class
         }
         public async Task<AuthResponse> LoginAsync(LoginData loginData)
         {
-            var username = await _userRepository.GetUserByUserNameAsync(loginData.UserName);
+            var username = await _userRepository.GetUserByUserNameAsync(loginData.UserName,loginData.Password);
 
-            if (username == null)
+            if (username.UserName == null && username.Password == null)
             {
                 return new AuthResponse
                 {

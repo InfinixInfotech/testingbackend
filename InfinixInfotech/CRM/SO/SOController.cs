@@ -25,7 +25,6 @@ namespace InfinixInfotech.CRM.SO
         [Authorize(Policy = ("AdminOrUser"))]
         public async Task<IActionResult> GetAllSO()
         {
-            //var grpName = await _homeController.GetGroupName();
             var response = await _sOService.GetAllSO();
             return response.Success ? Ok(response) : BadRequest(response);
         }
@@ -35,7 +34,6 @@ namespace InfinixInfotech.CRM.SO
         [Authorize(Policy = ("AdminOrUser"))]
         public async Task<IActionResult> InsertSO([FromBody] So sO)
         {
-           // var grpName = await _homeController.GetGroupName();
             var response = await _sOService.InsertSO(sO);
             return response.Success ? Ok(response) : BadRequest(response);
         }
@@ -45,7 +43,6 @@ namespace InfinixInfotech.CRM.SO
         [Authorize(Policy = ("AdminOrUser"))]
         public async Task<IActionResult> UpdateSO([FromBody] So sO)
         {
-            //var grpName = await _homeController.GetGroupName();
             var response = await _sOService.UpdateSO(sO);
             return response.Success ? Ok(response) : BadRequest(response);
         }
@@ -55,7 +52,6 @@ namespace InfinixInfotech.CRM.SO
         [Authorize(Policy = ("AdminOrUser"))]
         public async Task<IActionResult> DeleteSO(int id)
         {
-            //var grpName = await _homeController.GetGroupName();
             var response = await _sOService.DeleteSO(id);
             return response.Success ? Ok(response) : BadRequest(response);
         }
@@ -64,7 +60,6 @@ namespace InfinixInfotech.CRM.SO
         [Authorize(Policy = ("AdminOrUser"))]
         public async Task<IActionResult> GetSOById(int id)
         {
-           // var grpName = await _homeController.GetGroupName();
             var response = await _sOService.GetSOById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }

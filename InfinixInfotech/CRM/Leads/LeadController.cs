@@ -1,4 +1,4 @@
-﻿using InfinixInfotech.CRM.Common;
+﻿ using InfinixInfotech.CRM.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,17 +26,15 @@ namespace InfinixInfotech.CRM.Leads
         [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> AddLead([FromBody] Lead model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _leadService.AddLead(model, grpName);
+            var response = await _leadService.AddLead(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetLeadById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetLeadById(int id, string apiType, string accessType)
+        public async Task<IActionResult> GetLeadById(int id, string apiType, string accessType,string groupName)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _leadService.GetLeadById(id,apiType,accessType, grpName);
+            var response = await _leadService.GetLeadById(id,apiType,accessType, groupName);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpPut]
@@ -44,27 +42,24 @@ namespace InfinixInfotech.CRM.Leads
         [Authorize(Policy = "AdminOrUser")]
         public async Task<IActionResult> UpdateLeadById([FromBody] Lead model)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _leadService.UpdateLeadById(model, grpName);
+            var response = await _leadService.UpdateLeadById(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpDelete]
         [Route("DeleteLeadById")]
         [Authorize(Policy = "AdminOrUser")]
 
-        public async Task<IActionResult> DeleteLeadById(int id, string apiType, string accessType)
+        public async Task<IActionResult> DeleteLeadById(int id, string apiType, string accessType, string groupName)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _leadService.DeleteLeadById(id, apiType, accessType, grpName);
+            var response = await _leadService.DeleteLeadById(id, apiType, accessType, groupName);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetAllLead")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetAllLead(string apiType, string accessType)
+        public async Task<IActionResult> GetAllLead(string apiType, string accessType, string groupName)
         {
-            var grpName = await _homeController.GetGroupName();
-            var response = await _leadService.GetAllLead(apiType,accessType, grpName);
+            var response = await _leadService.GetAllLead(apiType,accessType, groupName);
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

@@ -10,7 +10,10 @@ namespace Models.Leads
 {
     public class Lead
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
+        public string CampaignName { get; set; }
+        public string SegmentName { get; set; }
+        public string groupName { get; set; }
         public string apiType { get; set; } 
         public string accessType { get; set; }  
         public string LeadId { get; set; }

@@ -1,6 +1,9 @@
 ﻿using Common;
+using Models.BulkLeads;
 using Models.Common;
 using Models.Leads;
+using Models.Mail;
+using Repository.BulkLead.IClass;
 using Repository.Common;
 using Repository.Leads.IClass;
 using Repository.Settings.IClass;
@@ -16,38 +19,57 @@ namespace Services.Leads.Class
         private readonly SequenceGenerator _sequenceGenerator;
         private readonly IIdentifierService _identifierService;
         private readonly IGroupsRepository _groupsRepository;
+        private readonly IBulkLeadRepository _bulkLeadRepository;
 
-        public LeadService(ILeadRepository leadRepository,SequenceGenerator sequenceGenerator, IIdentifierService identifierService, IGroupsRepository groupsRepository) 
+        public LeadService(ILeadRepository leadRepository,SequenceGenerator sequenceGenerator, IIdentifierService identifierService, IGroupsRepository groupsRepository,IBulkLeadRepository bulkLeadRepository) 
         { 
             _leadRepository = leadRepository;
             _sequenceGenerator = sequenceGenerator;
             _identifierService = identifierService;
             _groupsRepository = groupsRepository;
+            _bulkLeadRepository = bulkLeadRepository;
         }
-        public async Task<Response> AddLead(Lead lead, string groupName)
+        public async Task<Response> AddLead(Lead lead)
         {
-
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(lead.apiType, lead.accessType, groupName);
+                var isAccessType = await _groupsRepository.GetAccessKey(lead.apiType, lead.accessType, lead.groupName);
                 if (isAccessType == true)
                 {
-                    var id = _sequenceGenerator.GetNextSequence("Demos_Leads", "DemoLeadss_Sequence");
-                    lead.Id = id;
-                    lead.LeadId = await GetNextIdentifierAsync();
-                    await _leadRepository.AddLead(lead);
-                    return new Response { Success = true, Message = "Lead added successfully" };
+                    bool campaignExists = await _bulkLeadRepository.GetByCampaignName(lead.CampaignName);
+
+                    if (campaignExists)
+                    {
+                        lead.LeadId = await GetNextIdentifierAsync();
+                        var newLeadDetail = new _BulkLead.LeadDetail
+                        {
+                            Lead = lead
+                        };
+                        bool isUpdated = await _bulkLeadRepository.AddLeadToCampaign(lead.CampaignName, newLeadDetail);
+                        if (isUpdated)
+                        {
+                            return new Response { Success = true, Message = "Lead added to existing campaign successfully" };
+                        }
+                        else
+                        {
+                            return new Response { Success = false, Message = "Failed to add lead to the campaign" };
+                        }
+                    }
+                    return new Response
+                    {
+                        Success = false,
+                        Message = $"Campaign Name '{lead.CampaignName}' does not exist."
+                    };
                 }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+                return new Response { Success = false, Message = "Unauthorized credentials" };
             }
             catch (Exception ex)
             {
                 return new Response { Success = false, Error = ex.Message };
             }
         }
+
+
         public async Task<Response> GetLeadById(int id,string apiType, string accessType, string groupName)
         {
             try
@@ -72,11 +94,11 @@ namespace Services.Leads.Class
                 return new Response { Success = false, Error = ex.Message };
             }
         }
-        public async Task<Response> UpdateLeadById(Lead model, string groupName)
+        public async Task<Response> UpdateLeadById(Lead model)
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(model.apiType, model.accessType, groupName);
+                var isAccessType = await _groupsRepository.GetAccessKey(model.apiType, model.accessType,model.groupName);
                 if (isAccessType == true)
                 {
 

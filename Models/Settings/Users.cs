@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Models.Settings
         public List<string> VendorAccess { get; set; }
         public List<string> ExceptVendorAccess { get; set; }
         public List<string> CustomFetch { get; set; }
+        public List<FetchedLeads> FetchedLeads { get; set; } = null;
         public string CustomFetchRatio { get; set; }
         public int OTPNumber { get; set; }
         [BsonElement("DateOfBirth")]
@@ -79,4 +81,10 @@ public class BankDetails
     public string BankName { get; set; }
     public string IFSC { get; set; }
     public string AccountNumber { get; set; }
+}
+public class FetchedLeads
+{
+    private string _createDate;
+    public string FetchedDate { get; set; }
+    public int TotalFetchedLeads { get; set; }
 }

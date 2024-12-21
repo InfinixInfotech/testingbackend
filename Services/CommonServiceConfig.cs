@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Services.BulkLead.Class;
+using Services.BulkLead.IClass;
 using Services.Common;
 using Services.Common.Class;
 using Services.Common.IClass;
@@ -39,6 +41,7 @@ namespace Services
             services.AddScoped<IPaymentRaiseService, PaymentRaiseService>();
             services.AddScoped<ISOService, SOService>();
             services.AddScoped<ISMSService, SMSService>();
+            services.AddScoped<IBulkLeadService, BulkLeadService>();
         }
     }
 }

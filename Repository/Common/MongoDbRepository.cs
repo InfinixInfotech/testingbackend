@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Models.BulkLeads;
 using Models.Common;
 using Models.Demo;
 using Models.Leads;
@@ -42,5 +43,6 @@ namespace Repository.Common
         public IMongoCollection<InfinixId> InfinixId => _database.GetCollection<InfinixId>("InfinixId");
         public IMongoCollection<So> So => _database.GetCollection<So>("So");
         public IMongoCollection<Email> Email => _database.GetCollection<Email>("Email");
+        public IMongoCollection<_BulkLead> BulkLead => _database.GetCollection<_BulkLead>("BulkLead");
     }
 }
