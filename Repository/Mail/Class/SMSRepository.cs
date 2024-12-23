@@ -78,5 +78,19 @@ namespace Repository.Mail.Class
 
             return result;
         }
+        public async Task<List<Email>> GetSMSByEmployeeCode(string employeeCode)
+        {
+            // Create a filter to find emails where EmployeeCode contains the given value
+            var filter = Builders<Email>.Filter.AnyEq(email => email.EmployeeCode, employeeCode);
+
+            // Sort emails in descending order of creation date
+            var sort = Builders<Email>.Sort.Descending(email => email.Id);
+
+            // Query the database and return the results
+            var emails = await _collection.Find(filter).Sort(sort).ToListAsync();
+
+            return emails;
+        }
+
     }
 }

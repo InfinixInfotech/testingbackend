@@ -17,5 +17,6 @@ namespace Services.Mail.IClass
         Task<Response> DeleteSMSById(int id);
         Task<Response> GetAllSMSByEmployeeCode(string employeeCode);
         Task<Response> GetAllSMSByisImportant(bool isimportant);
+        Task<Response> GetSMSByEmployeeCode(string EmployeeCode);
     }
 }

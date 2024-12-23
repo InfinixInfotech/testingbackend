@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Models.Common;
 using Models.Leads;
 using Models.Mail;
+using MongoDB.Driver;
 using Repository.Common;
 using Repository.Leads.Class;
 using Repository.Leads.IClass;
@@ -285,6 +286,43 @@ namespace Services.Mail.Class
                     email.Templatetype,
                 }).ToList();
 
+
+                return new Response
+                {
+                    Success = true,
+                    Message = "Messages retrieved successfully.",
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    Success = false,
+                    Message = "An error occurred while fetching messages.",
+                    Error = ex.Message
+                };
+            }
+        }
+        public async Task<Response> GetSMSByEmployeeCode(string employeeCode)
+        {
+            try
+            {
+                var emails = await _sMSRepository.GetSMSByEmployeeCode(employeeCode);
+                var result = emails.Select(email => new
+                {
+                    email.Id,
+                    email.Subject,
+                    email.From,
+                    email.CreateDate,
+                    email.CreateTime,
+                    email.isImportant,
+                    email.Templatetype,
+                    email.Message,
+                    To = string.Join(", ", email.To ?? new List<string>()),
+                    CC = string.Join(", ", email.CC ?? new List<string>()),
+                    BCC = string.Join(", ", email.BCC ?? new List<string>()),
+                }).ToList();
 
                 return new Response
                 {

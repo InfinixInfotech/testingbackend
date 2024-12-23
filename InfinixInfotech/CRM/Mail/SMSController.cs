@@ -112,5 +112,13 @@ namespace InfinixInfotech.CRM.Mail
             var response = await _groupsService.GetAllGroupNameAndID();
             return StatusCode(response.Success ? 200 : 500, response);
         }
+        [HttpGet]
+        [Route("GetSMSByEmployeeCode")]
+        //[Authorize(Policy = "AdminOrUser")]
+        public async Task<IActionResult> GetSMSByEmployeeCode(string EmployeeCode)
+        {
+            var response = await _sMSService.GetSMSByEmployeeCode(EmployeeCode);
+            return StatusCode(response.Success ? 200 : 500, response);
+        }
     }
 }
