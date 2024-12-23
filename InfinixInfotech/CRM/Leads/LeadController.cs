@@ -1,5 +1,4 @@
-﻿ using InfinixInfotech.CRM.Common;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Leads;
@@ -15,11 +14,9 @@ namespace InfinixInfotech.CRM.Leads
     public class LeadController : ControllerBase
     {
         private readonly ILeadService _leadService;
-        private readonly HomeController _homeController;
-        public LeadController(ILeadService leadService, HomeController homeController)
+        public LeadController(ILeadService leadService)
         {
             _leadService = leadService;
-            _homeController = homeController;
         }
         [HttpPost]
         [Route("AddLead")]
@@ -32,9 +29,9 @@ namespace InfinixInfotech.CRM.Leads
         [HttpGet]
         [Route("GetLeadById")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetLeadById(int id, string apiType, string accessType,string groupName)
+        public async Task<IActionResult> GetLeadById(int id)
         {
-            var response = await _leadService.GetLeadById(id,apiType,accessType, groupName);
+            var response = await _leadService.GetLeadById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpPut]
@@ -49,17 +46,17 @@ namespace InfinixInfotech.CRM.Leads
         [Route("DeleteLeadById")]
         [Authorize(Policy = "AdminOrUser")]
 
-        public async Task<IActionResult> DeleteLeadById(int id, string apiType, string accessType, string groupName)
+        public async Task<IActionResult> DeleteLeadById(int id)
         {
-            var response = await _leadService.DeleteLeadById(id, apiType, accessType, groupName);
+            var response = await _leadService.DeleteLeadById(id);
             return StatusCode(response.Success ? 200 : 500, response);
         }
         [HttpGet]
         [Route("GetAllLead")]
         [Authorize(Policy = "AdminOrUser")]
-        public async Task<IActionResult> GetAllLead(string apiType, string accessType, string groupName)
+        public async Task<IActionResult> GetAllLead()
         {
-            var response = await _leadService.GetAllLead(apiType,accessType, groupName);
+            var response = await _leadService.GetAllLead();
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

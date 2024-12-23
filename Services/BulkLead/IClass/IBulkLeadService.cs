@@ -12,5 +12,6 @@ namespace Services.BulkLead.IClass
     {
         Task<Response> BulkLeadUpload(_leads bulkLead);
         Task<Response> CustomeFetchLeads(string EmployeeCode, string CampaignName);
+        Task<Response> GetLeadByEmployeeCode(string employeeCode);
     }
 }

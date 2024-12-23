@@ -1,5 +1,4 @@
-﻿using InfinixInfotech.CRM.Common;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Leads;
@@ -13,11 +12,9 @@ namespace InfinixInfotech.CRM.PR
     public class LeadPaymentRaiseController : ControllerBase
     {
         private readonly IPaymentRaiseService _paymentRaise;
-        private readonly HomeController _homeController;
-        public LeadPaymentRaiseController(IPaymentRaiseService paymentRaise, HomeController homeController)
+        public LeadPaymentRaiseController(IPaymentRaiseService paymentRaise)
         {
             _paymentRaise = paymentRaise;
-            _homeController = homeController;
         }
         [HttpPost]
         [Route("AddLeadPR")]

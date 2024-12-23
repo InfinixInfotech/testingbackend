@@ -36,20 +36,42 @@ namespace Repository.BulkLead.Class
 
             var result = await _collection.UpdateOneAsync(filter, update);
             return result.ModifiedCount > 0;
-        }
-        public async Task<List<_BulkLead.LeadDetail>> GetTop5LeadsByCampaignNameAsync(string campaignName, int customratio)
+        }       
+        public async Task<List<_BulkLead.LeadDetail>> UpdateTopLeadsByCampaignNameAsync(string campaignName, int customratio, string employeeCode)
         {
             var filter = Builders<_BulkLead>.Filter.Eq(b => b.CampaignName, campaignName);
-            var projection = Builders<_BulkLead>.Projection.Expression(b =>
-                b.Leads.Where(ld => ld.Lead.AssignedTo == null).Take(customratio).ToList()
-            );
+            var bulkLead = await _collection.Find(filter).FirstOrDefaultAsync();
 
-            var result = await _collection
-                .Find(filter)
-                .Project(projection)
-                .FirstOrDefaultAsync();
+            if (bulkLead == null || bulkLead.Leads == null)
+                return new List<_BulkLead.LeadDetail>();
+            var leadsToUpdate = bulkLead.Leads
+                .Where(ld => ld.Lead.EmployeeCode == null)
+                .Take(customratio)
+                .ToList();
 
-            return result ?? new List<_BulkLead.LeadDetail>();
+            if (!leadsToUpdate.Any())
+                return new List<_BulkLead.LeadDetail>();
+            foreach (var leadDetail in leadsToUpdate)
+            {
+                leadDetail.Lead.EmployeeCode = employeeCode;
+            }
+            var updateDefinition = Builders<_BulkLead>.Update.Set(b => b.Leads, bulkLead.Leads);
+
+            await _collection.UpdateOneAsync(filter, updateDefinition);
+            await _collection.UpdateOneAsync(filter, updateDefinition);
+            return leadsToUpdate;
+        }
+
+        public async Task<List<_BulkLead.LeadDetail>> GetLeadsByEmployeeCodeAsync(string employeeCode)
+        {
+            var filter = Builders<_BulkLead>.Filter.ElemMatch(b => b.Leads, lead => lead.Lead.EmployeeCode == employeeCode);
+            var bulkLeads = await _collection.Find(filter).ToListAsync();
+            var leads = bulkLeads
+                .SelectMany(b => b.Leads)
+                .Where(ld => ld.Lead.EmployeeCode == employeeCode)
+                .ToList();
+
+            return leads;
         }
 
     }

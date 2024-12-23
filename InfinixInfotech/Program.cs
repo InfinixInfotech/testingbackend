@@ -9,7 +9,6 @@ using Services.Common.IClass;
 using System.Text;
 using Common;
 using Models.Common;
-using InfinixInfotech.CRM.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +19,6 @@ builder.Services.AddControllers();
 
 // Add scoped services
 builder.Services.AddScoped<JwtAcessToken>();
-builder.Services.AddScoped<HomeController>();
 builder.Services.AddScoped<SequenceGenerator>();
 
 // Configure MongoDB

@@ -33,9 +33,7 @@ namespace Services.Leads.Class
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(lead.apiType, lead.accessType, lead.groupName);
-                if (isAccessType == true)
-                {
+               
                     bool campaignExists = await _bulkLeadRepository.GetByCampaignName(lead.CampaignName);
 
                     if (campaignExists)
@@ -60,8 +58,7 @@ namespace Services.Leads.Class
                         Success = false,
                         Message = $"Campaign Name '{lead.CampaignName}' does not exist."
                     };
-                }
-                return new Response { Success = false, Message = "Unauthorized credentials" };
+              
             }
             catch (Exception ex)
             {
@@ -70,24 +67,18 @@ namespace Services.Leads.Class
         }
 
 
-        public async Task<Response> GetLeadById(int id,string apiType, string accessType, string groupName)
+        public async Task<Response> GetLeadById(int id)
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(apiType, accessType, groupName);
-                if (isAccessType == true)
-                {
+              
                     var user = await _leadRepository.GetLeadById(id);
                     if (user == null)
                     {
                         return new Response { Success = false, Error = "User not found." };
                     }
                     return new Response { Success = true, Data = user };
-                }
-                else
-                {
-                    return new Response { Success = false, Error = "Unauthorize cradential" };
-                }
+               
             }
             catch (Exception ex)
             {
@@ -98,31 +89,22 @@ namespace Services.Leads.Class
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(model.apiType, model.accessType,model.groupName);
-                if (isAccessType == true)
-                {
+               
 
                     await _leadRepository.UpdateLeadById(model);
                     return new Response { Success = true, Message = "Lead updated successfully" };
-                }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+                
             }
             catch (Exception ex)
             {
                 return new Response { Success = false, Error = ex.Message };
             }
         }
-        public async Task<Response> GetAllLead(string apiType, string accessType, string groupName)
+        public async Task<Response> GetAllLead()
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(apiType, accessType, groupName);
-                if (isAccessType == true)
-                {
-                    var lead = await _leadRepository.GetAllLead();
+                 var lead = await _leadRepository.GetAllLead();
                     var data = lead.Select(lead => new GetLead
                     {
                         LeadId = lead.LeadId,
@@ -143,24 +125,18 @@ namespace Services.Leads.Class
                     }).ToList();
 
                     return new Response { Success = true, Data = data };
-                }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+                
             }
             catch (Exception ex)
             {
                 return new Response { Success = false, Error = ex.Message };
             }
         }
-        public async Task<Response> DeleteLeadById(int id, string apiType, string accessType, string groupName)
+        public async Task<Response> DeleteLeadById(int id)
         {
             try
             {
-                var isAccessType = await _groupsRepository.GetAccessKey(apiType, accessType, groupName);
-                if (isAccessType == true)
-                {
+               
                     var user = await _leadRepository.GetLeadById(id);
                     if (user == null)
                     {
@@ -174,11 +150,7 @@ namespace Services.Leads.Class
                     }
 
                     return new Response { Success = false, Error = "Failed to delete the lead." };
-                }
-                else
-                {
-                    return new Response { Success = false, Message = "Unauthorize cradential" };
-                }
+               
             }
             catch (Exception ex)
             {

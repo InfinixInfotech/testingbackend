@@ -1,5 +1,4 @@
-﻿using InfinixInfotech.CRM.Common;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Settings;
@@ -13,11 +12,9 @@ namespace InfinixInfotech.CRM.SO
     public class SOController : ControllerBase
     {
         private readonly ISOService _sOService;
-        private readonly HomeController _homeController;
-        public SOController(ISOService sOService, HomeController homeController)
+        public SOController(ISOService sOService)
         {
             _sOService = sOService;
-            _homeController = homeController;
 
         }
         [HttpGet]

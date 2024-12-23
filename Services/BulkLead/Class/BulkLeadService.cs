@@ -20,6 +20,7 @@ using Repository.Settings.IClass;
 using Models.Login;
 using MongoDB.Driver;
 using Models.Leads;
+using Repository.Settings.Class;
 
 
 namespace Services.BulkLead.Class
@@ -157,7 +158,7 @@ namespace Services.BulkLead.Class
                     {
                         totalFetchedLeads += result.CustomRatio;
                         await _userRepository.UpdateTotalFetchedLeadsAsync(EmployeeCode, currentDate, totalFetchedLeads);
-                        var lead = await _bulkLeadRepository.GetTop5LeadsByCampaignNameAsync(CampaignName, result.CustomRatio);
+                        var lead = await _bulkLeadRepository.UpdateTopLeadsByCampaignNameAsync(CampaignName, result.CustomRatio, EmployeeCode);
                         return new Response { Success = true, Data = lead };
                     }
                 }
@@ -181,7 +182,7 @@ namespace Services.BulkLead.Class
                         {
                             totalFetchedLeads += result.CustomRatio;
                             await _userRepository.UpdateTotalFetchedLeadsAsync(EmployeeCode, FetchedDate, totalFetchedLeads);
-                            var lead = await _bulkLeadRepository.GetTop5LeadsByCampaignNameAsync(CampaignName, result.CustomRatio);
+                            var lead = await _bulkLeadRepository.UpdateTopLeadsByCampaignNameAsync(CampaignName, result.CustomRatio, EmployeeCode);
                             return new Response { Success = true, Data = lead };
                         }
                     }
@@ -189,6 +190,23 @@ namespace Services.BulkLead.Class
                 }
             }
             return new Response { Success = false };
+        }
+        public async Task<Response> GetLeadByEmployeeCode(string employeeCode)
+        {
+            try
+            {
+                var user = await _bulkLeadRepository.GetLeadsByEmployeeCodeAsync(employeeCode);
+                    if (user == null)
+                    {
+                        return new Response { Success = false, Error = "Leads not found." };
+                    }
+                    return new Response { Success = true, Data = user };
+               
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
         }
     }
 }
