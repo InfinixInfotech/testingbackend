@@ -9,7 +9,7 @@ namespace Models.Settings
   public class LeadStatus
     {
         public int Id { get; set; }
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
     }
 }

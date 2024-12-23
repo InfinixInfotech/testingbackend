@@ -9,6 +9,6 @@ namespace Models.Settings
     public class LeadSource
     {
         public int Id { get; set; }
-        public string LeadSourceValue { get; set; }
+        public string? LeadSourceValue { get; set; }
     }
 }

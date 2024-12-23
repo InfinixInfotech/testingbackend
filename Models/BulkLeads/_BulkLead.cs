@@ -13,11 +13,11 @@ namespace Models.BulkLeads
     public class _BulkLead
     {
         public int Id {  get; set; }
-        public string CampaignName { get; set; }
-        public string LeadSourceName { get; set; }
-        public string SegmentName { get; set; }
-        public FileContent CsvLeadFile { get; set; }
-        public List<LeadDetail> Leads { get; set; } 
+        public string? CampaignName { get; set; }
+        public string? LeadSourceName { get; set; }
+        public string? SegmentName { get; set; }
+        public FileContent? CsvLeadFile { get; set; }
+        public List<LeadDetail>? Leads { get; set; } 
         public class LeadDetail
         {
            public Lead Lead { get; set; }   

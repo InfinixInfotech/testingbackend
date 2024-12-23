@@ -10,10 +10,10 @@ namespace Models.BulkLeads
 {
     public class _leads
     {
-        public string CampaignName { get; set; }
-        public string LeadSourceName { get; set; }
-        public string SegmentName { get; set; }
-        public IFormFile CsvLeadFile { get; set; }
+        public string? CampaignName { get; set; }
+        public string? LeadSourceName { get; set; }
+        public string? SegmentName { get; set; }
+        public IFormFile? CsvLeadFile { get; set; }
       
     }
 }
