@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -42,229 +43,366 @@ namespace Models.Settings
 }
 public class Dashboard
 {
-    public bool? SalesDashboard { get; set; }
-    public bool? CallingDashboard { get; set; }
+    [DefaultValue(false)]
+    public bool? SalesDashboard { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? CallingDashboard { get; set; } = false;
 }
 
 public class Leadss
 {
-    public bool? Create { get; set; }
-    public bool? View { get; set; }
-    public bool? MarketingLeads { get; set; }
-    public bool? Edit { get; set; }
-    public bool? Delete { get; set; }
-    public bool? Dispose { get; set; }
-    public bool? DisposeClients { get; set; }
-    public bool? Upload { get; set; }
-    public bool? InternalAssign { get; set; }
-    public bool? OuterAssign { get; set; }
-    public bool? GlobalAssign { get; set; }
-    public bool? ViewFollowUp { get; set; }
-    public bool? DeleteFollowUp { get; set; }
-    public bool? FollowAssign { get; set; }
-    public bool? BulkLeadOperation { get; set; }
-    public bool? LeadAction { get; set; }
-    public bool? LeadActionAssign { get; set; }
-    public bool? CreateAgreement { get; set; }
-    public bool? AddRPM { get; set; }
+    [DefaultValue(false)]
+    public bool? Create { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? View { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MarketingLeads { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Edit { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Delete { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Dispose { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? DisposeClients { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Upload { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? InternalAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? OuterAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GlobalAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ViewFollowUp { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? DeleteFollowUp { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? FollowAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? BulkLeadOperation { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LeadAction { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LeadActionAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? CreateAgreement { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? AddRPM { get; set; } = false;
 }
 
 public class Contact
 {
-    public bool? Create { get; set; }
-    public bool? View { get; set; }
-    public bool? ContactAssign { get; set; }
-    public bool? ContactAction { get; set; }
-    public bool? ContactActionAssign { get; set; }
+    [DefaultValue(false)]
+    public bool? Create { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? View { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ContactAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ContactAction { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ContactActionAssign { get; set; } = false;
 }
 
 public class MutualFund
 {
-    public bool? Create { get; set; }
-    public bool? View { get; set; }
-    public bool? MutualFundAssign { get; set; }
-    public bool? MutualFundAction { get; set; }
-    public bool? MutualFundActionAssign { get; set; }
+    [DefaultValue(false)]
+    public bool? Create { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? View { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MutualFundAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MutualFundAction { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MutualFundActionAssign { get; set; } = false;
 }
 
 public class FreeTrial
 {
-    public bool? Create { get; set; }
-    public bool? View { get; set; }
-    public bool? Edit { get; set; }
-    public bool? OuterAssign { get; set; }
+    [DefaultValue(false)]
+    public bool? Create { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? View { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Edit { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? OuterAssign { get; set; } = false;
 }
 
 public class _SO
 {
-    public bool? Create { get; set; }
-    public bool? View { get; set; }
-    public bool? Edit { get; set; }
-    public bool? ApproveSO { get; set; }
-    public bool? Invoice { get; set; }
-    public bool? PaymentPortal { get; set; }
-    public bool? PaymentApproval { get; set; }
-    public bool? PaymentEdit { get; set; }
-    public bool? Delete { get; set; }
-    public bool? ServiceActivation { get; set; }
-    public bool? PaidClientAssign { get; set; }
-    public bool? PaidClientAction { get; set; }
-    public bool? PaidClientActionAssign { get; set; }
+    [DefaultValue(false)]
+    public bool? Create { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? View { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Edit { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ApproveSO { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Invoice { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaymentPortal { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaymentApproval { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaymentEdit { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Delete { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ServiceActivation { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaidClientAssign { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaidClientAction { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaidClientActionAssign { get; set; } = false;
 }
 
 public class Compliance
 {
-    public bool? KYC { get; set; }
-    public bool? RiskProfile { get; set; }
-    public bool? Agreement { get; set; }
-    public bool? AgreementApproved { get; set; }
-    public bool? ViewRPM { get; set; }
-    public bool? EditRPM { get; set; }
-    public bool? Invoice { get; set; }
-    public bool? SOReport { get; set; }
-    public bool? TaxReport { get; set; }
+    [DefaultValue(false)]
+    public bool? KYC { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? RiskProfile { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Agreement { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? AgreementApproved { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ViewRPM { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? EditRPM { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Invoice { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SOReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? TaxReport { get; set; } = false;
 }
 
 public class LeadTemplate
 {
-    public bool? SendSMSLead { get; set; }
-    public bool? SendWhatsappLead { get; set; }
-    public bool? SendEmailLead { get; set; }
+    [DefaultValue(false)]
+    public bool? SendSMSLead { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendWhatsappLead { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendEmailLead { get; set; } = false;
 }
 
 public class ClientTemplate
 {
-    public bool? SendSMSClient { get; set; }
-    public bool? SendWhatsappClient { get; set; }
-    public bool? SendEmailClient { get; set; }
+    [DefaultValue(false)]
+    public bool? SendSMSClient { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendWhatsappClient { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendEmailClient { get; set; } = false;
 }
 
 public class HRExtra
 {
-    public bool? ORGChart { get; set; }
-    public bool? ScrapBook { get; set; }
-    public bool? Holiday { get; set; }
+    [DefaultValue(false)]
+    public bool? ORGChart { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ScrapBook { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Holiday { get; set; } = false;
 }
 
 public class SupportModule
 {
-    public bool? ITAdmin { get; set; }
-    public bool? HRAdmin { get; set; }
-    public bool? ComplianceAdmin { get; set; }
-    public bool? Admin { get; set; }
+    [DefaultValue(false)]
+    public bool? ITAdmin { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? HRAdmin { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ComplianceAdmin { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Admin { get; set; } = false;
 }
 
 public class TeamMembers
 {
-    public bool? List { get; set; }
-    public bool? Data { get; set; }
+    [DefaultValue(false)]
+    public bool? List { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Data { get; set; } = false;
 }
 
 public class SMSModule
 {
-    public bool? SendSMS { get; set; }
-    public bool? ViewSMS { get; set; }
+    [DefaultValue(false)]
+    public bool? SendSMS { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ViewSMS { get; set; } = false;
 }
 
 public class CallingModule
 {
-    public bool? Monitoring { get; set; }
-    public bool? Reports { get; set; }
-    public bool? SendSMSViaGateway { get; set; }
-    public bool? ViewSMSViaGateway { get; set; }
-    public bool? MissCall { get; set; }
-    public bool? LiveCall { get; set; }
+    [DefaultValue(false)]
+    public bool? Monitoring { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Reports { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendSMSViaGateway { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ViewSMSViaGateway { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MissCall { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LiveCall { get; set; } = false;
 }
 
 public class Reports
 {
-    public bool? GeneralReport { get; set; }
-    public bool? FTReport { get; set; }
-    public bool? PaidClientReport { get; set; }
-    public bool? ExpiredPaidClientReport { get; set; }
-    public bool? UserReport { get; set; }
-    public bool? CallingReport { get; set; }
-    public bool? MessageReport { get; set; }
-    public bool? SMSReport { get; set; }
-    public bool? DNDReport { get; set; }
-    public bool? Tracksheet { get; set; }
-    public bool? ResearchReport { get; set; }
-}
+    [DefaultValue(false)]
+    public bool? GeneralReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? FTReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PaidClientReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ExpiredPaidClientReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? UserReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? CallingReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MessageReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SMSReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? DNDReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Tracksheet { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ResearchReport { get; set; } = false;
+} 
 
 public class Logs
 {
-    public bool? Client { get; set; }
-    public bool? SMS { get; set; }
-    public bool? Chat { get; set; }
-    public bool? Whatsapp { get; set; }
-    public bool? Login { get; set; }
-    public bool? Extension { get; set; }
+    [DefaultValue(false)]
+    public bool? Client { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SMS { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Chat { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Whatsapp { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Login { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Extension { get; set; } = false;
 }
 
 public class Extra
 {
-    public bool? CallingModule { get; set; }
-    public bool? UserModule { get; set; }
-    public bool? GroupModule { get; set; }
-    public bool? PoolsModule { get; set; }
-    public bool? LeadStatusModule { get; set; }
-    public bool? SegmentModule { get; set; }
-    public bool? SOModule { get; set; }
-    public bool? FetchingReport { get; set; }
-    public bool? MailDelete { get; set; }
-    public bool? Forecast { get; set; }
-    public bool? Brokerage { get; set; }
-    public bool? LiveUpdates { get; set; }
-    public bool? Policy { get; set; }
-    public bool? LeadApproval { get; set; }
-    public bool? GroupDesignation { get; set; }
-    public bool? GroupDepartment { get; set; }
-    public bool? GroupHierarchy { get; set; }
-    public bool? CustomSMS { get; set; }
-    public bool? Notification { get; set; }
-    public bool? NotificationUpdate { get; set; }
-    public bool? LeaderDashboardUpdate { get; set; }
-    public bool? GroupChat { get; set; }
+    [DefaultValue(false)]
+    public bool? CallingModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? UserModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GroupModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PoolsModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LeadStatusModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SegmentModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SOModule { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? FetchingReport { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? MailDelete { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Forecast { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Brokerage { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LiveUpdates { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Policy { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LeadApproval { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GroupDesignation { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GroupDepartment { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GroupHierarchy { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? CustomSMS { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Notification { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? NotificationUpdate { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? LeaderDashboardUpdate { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? GroupChat { get; set; } = false;
 }
 
 public class MIS
 {
-    public bool? Employee { get; set; }
-    public bool? Lead { get; set; }
-    public bool? Client { get; set; }
-    public bool? Sales { get; set; }
-    public bool? DisposeLeads { get; set; }
-    public bool? PreSales { get; set; }
+    [DefaultValue(false)]
+    public bool? Employee { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Lead { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Client { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Sales { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? DisposeLeads { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? PreSales { get; set; } = false;
 }
 
 public class Whatsapp
 {
-    public bool? ShowWhatsapp { get; set; }
-    public bool? SendAttachment { get; set; }
+    [DefaultValue(false)]
+    public bool? ShowWhatsapp { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SendAttachment { get; set; } = false;
 }
 
 public class Export
 {
-    public bool? Leads { get; set; }
-    public bool? Contacts { get; set; }
-    public bool? FreeTrial { get; set; }
-    public bool? FollowUp { get; set; }
-    public bool? Clients { get; set; }
-    public bool? SalesOrder { get; set; }
-    public bool? SMSLogs { get; set; }
-    public bool? ChatLogs { get; set; }
+    [DefaultValue(false)]
+    public bool? Leads { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Contacts { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? FreeTrial { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? FollowUp { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? Clients { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SalesOrder { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? SMSLogs { get; set; } = false;
+    [DefaultValue(false)]
+    public bool? ChatLogs { get; set; } = false;
 }
 
 public class LeadFetch
 {
-    public bool? Active { get; set; }
-    public List<string>? From { get; set; }
+    [DefaultValue(false)]
+    public bool? Active { get; set; } = false;
+    public List<string>? From { get; set; } 
     public string? Ratio { get; set; }
 }
 
 public class ClientFetch
 {
-    public bool? Active { get; set; }
+    [DefaultValue(false)]
+    public bool? Active { get; set; } = false;
     public List<string>? From { get; set; }
     public string? Ratio { get; set; }
 }
