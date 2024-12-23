@@ -50,23 +50,27 @@ namespace Services.Settings.Class
         }
         private string GenerateSplitValue(Users users)
         {
+            // Extract the first name from FullName
             string firstName = users.FullName?.Split(' ')[0].ToLower();
             string abc = firstName.ToUpper();
             string dayPart = string.Empty;
 
-            // Assuming DateOfBirth is a string in a known format, e.g., "dd-MM-yyyy"
-            if (DateTime.TryParseExact(users.DateOfBirth, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dob))
+            // Handle the DateOfBirth string to extract the day part
+            if (!string.IsNullOrEmpty(users.DateOfBirth) &&
+                DateTime.TryParseExact(users.DateOfBirth, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dob))
             {
-                dayPart = dob.ToString("dd");  // Extract day part from DateTime
+                dayPart = dob.ToString("dd"); // Extract day part from valid DateOfBirth
             }
             else
             {
-                // Handle invalid DateOfBirth format if needed
-                dayPart = "Invalid Date"; // or handle accordingly
+                // Provide a default or handle invalid DateOfBirth format
+                dayPart = "00"; // Default value for invalid date
             }
 
             return $"{abc}{dayPart}";
         }
+
+
 
         public async Task<Response> UpdateUsersById(Users model)
         {   
