@@ -32,9 +32,9 @@ namespace InfinixInfotech.CRM.BulkLeads
         }
         [HttpGet]
         [Route("GetLeadByEmployeeCode")]
-        public async Task<IActionResult> GetLeadByEmployeeCode(string EmployeeCode)
+        public async Task<IActionResult> GetLeadByEmployeeCode(string EmployeeCode, string CampaignName)
         {
-            var response = await _bulkLeadService.GetLeadByEmployeeCode(EmployeeCode);
+            var response = await _bulkLeadService.GetLeadByEmployeeCode(EmployeeCode, CampaignName);
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

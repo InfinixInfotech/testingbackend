@@ -62,17 +62,23 @@ namespace Repository.BulkLead.Class
             return leadsToUpdate;
         }
 
-        public async Task<List<_BulkLead.LeadDetail>> GetLeadsByEmployeeCodeAsync(string employeeCode)
+        public async Task<List<_BulkLead.LeadDetail>> GetLeadsByEmployeeCodeAndCampaignAsync(string employeeCode, string campaignName)
         {
-            var filter = Builders<_BulkLead>.Filter.ElemMatch(b => b.Leads, lead => lead.Lead.EmployeeCode == employeeCode);
+            var filter = Builders<_BulkLead>.Filter.And(
+                Builders<_BulkLead>.Filter.ElemMatch(
+                    b => b.Leads,
+                    lead => lead.Lead.EmployeeCode == employeeCode && lead.Lead.CampaignName == campaignName
+                )
+            );
             var bulkLeads = await _collection.Find(filter).ToListAsync();
             var leads = bulkLeads
                 .SelectMany(b => b.Leads)
-                .Where(ld => ld.Lead.EmployeeCode == employeeCode)
+                .Where(ld => ld.Lead.EmployeeCode == employeeCode && ld.Lead.CampaignName == campaignName)
                 .ToList();
 
             return leads;
         }
+
 
     }
 }

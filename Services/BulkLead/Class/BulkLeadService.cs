@@ -191,11 +191,11 @@ namespace Services.BulkLead.Class
             }
             return new Response { Success = false };
         }
-        public async Task<Response> GetLeadByEmployeeCode(string employeeCode)
+        public async Task<Response> GetLeadByEmployeeCode(string employeeCode , string CampaignName)
         {
             try
             {
-                var user = await _bulkLeadRepository.GetLeadsByEmployeeCodeAsync(employeeCode);
+                var user = await _bulkLeadRepository.GetLeadsByEmployeeCodeAndCampaignAsync(employeeCode, CampaignName);
                     if (user == null)
                     {
                         return new Response { Success = false, Error = "Leads not found." };
