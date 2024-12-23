@@ -11,53 +11,53 @@ namespace Models.Leads
     public class Lead
     {
         public int Id { get; set; }
-        public string CampaignName { get; set; }
-        public string SegmentName { get; set; }
-        public string groupName { get; set; }
-        public string apiType { get; set; } 
-        public string accessType { get; set; }  
-        public string LeadId { get; set; }
-        public string ClientName { get; set; }
-        public string AssignedTo { get; set; }
-        public string EmployeeCode { get; set; }
-        public string LeadSource { get; set; }
-        public string Mobile { get; set; }
-        public string AlternateMobile { get; set; }
-        public string OtherMobile1 { get; set; }
-        public string OtherMobile2 { get; set; }
-        public string Email { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Dob { get; set; }
-        public InvestmentDetail InvestmentDetail { get; set; }
-        public string Language { get; set; }
-        public FollowupDetail FollowupDetail { get; set; }
+        public string? CampaignName { get; set; }
+        public string? SegmentName { get; set; }
+        public string? groupName { get; set; }
+        public string? apiType { get; set; } 
+        public string? accessType { get; set; }  
+        public string? LeadId { get; set; }
+        public string? ClientName { get; set; }
+        public string? AssignedTo { get; set; }
+        public string? EmployeeCode { get; set; }
+        public string? LeadSource { get; set; }
+        public string? Mobile { get; set; }
+        public string? AlternateMobile { get; set; }
+        public string? OtherMobile1 { get; set; }
+        public string? OtherMobile2 { get; set; }
+        public string? Email { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Dob { get; set; }
+        public InvestmentDetail? InvestmentDetail { get; set; }
+        public string? Language { get; set; }
+        public FollowupDetail? FollowupDetail { get; set; }
     }
 }
 public class InvestmentDetail
 {
-    public string Investment { get; set; }
-    public string Profile { get; set; }
-    public string Trading { get; set; }
-    public int Lot { get; set; }
-    public string TradingExp { get; set; }
-    public string AnnualIncome { get; set; }
-    public string InvestmentGoal { get; set; }
-    public string MarketValue { get; set; }
-    public string MinInvestment { get; set; }
-    public string SourceOfIncome { get; set; }
-    public string PanNo { get; set; }
-    public string UidAadhaar { get; set; }
-    public string AmountCapping { get; set; }
+    public string? Investment { get; set; }
+    public string? Profile { get; set; }
+    public string? Trading { get; set; }
+    public int? Lot { get; set; }
+    public string? TradingExp { get; set; }
+    public string? AnnualIncome { get; set; }
+    public string? InvestmentGoal { get; set; }
+    public string? MarketValue { get; set; }
+    public string? MinInvestment { get; set; }
+    public string? SourceOfIncome { get; set; }
+    public string? PanNo { get; set; }
+    public string? UidAadhaar { get; set; }
+    public string? AmountCapping { get; set; }
 }
 
 public class FollowupDetail
 {
-    public string LeadStatus { get; set; }
-    public string Segment { get; set; }
-    public string FreeTrialStartDate { get; set; }
-    public string FreeTrialEndDate { get; set; }
-    public string FollowUpDate { get; set; }
-    public string Comment { get; set; }
+    public string? LeadStatus { get; set; }
+    public string? Segment { get; set; }
+    public string? FreeTrialStartDate { get; set; }
+    public string? FreeTrialEndDate { get; set; }
+    public string? FollowUpDate { get; set; }
+    public string? Comment { get; set; }
 }
 
