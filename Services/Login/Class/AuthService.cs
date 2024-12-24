@@ -42,7 +42,8 @@ namespace Services.Login.Class
                 Message = "Login successful.",
                 EmployeeCode = userDetails.EmpCode,
                 GroupName = userDetails.GroupName,
-                Data = getGroupData
+                Data = getGroupData,
+                UserName = userDetails.FullName,
             };
         }
 

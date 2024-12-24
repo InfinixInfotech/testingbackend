@@ -15,5 +15,6 @@ namespace Models.Login
         public string? EmployeeCode { get; set; }
         public string? GroupName { get; set; }
         public object? Data { get; set; }
+        public string? UserName { get; set; }
     }
 }
