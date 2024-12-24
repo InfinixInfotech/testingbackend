@@ -208,5 +208,15 @@ namespace Services.BulkLead.Class
                 return new Response { Success = false, Error = ex.Message };
             }
         }
+        public async Task<Response> UpdateLeadById(Lead model)
+        {
+            var success = await _bulkLeadRepository.UpdateLeadById(model);
+            return new Response
+            {
+                Success = success,
+                Message = success ? "Lead updated successfully." : "Failed to update lead."
+            };
+        }
+
     }
 }

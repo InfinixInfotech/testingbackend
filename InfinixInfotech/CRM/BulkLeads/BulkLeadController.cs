@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.BulkLeads;
+using Models.Leads;
 using Services.BulkLead.IClass;
 using Services.SO.Class;
 
@@ -35,6 +36,13 @@ namespace InfinixInfotech.CRM.BulkLeads
         public async Task<IActionResult> GetLeadByEmployeeCode(string EmployeeCode, string CampaignName)
         {
             var response = await _bulkLeadService.GetLeadByEmployeeCode(EmployeeCode, CampaignName);
+            return StatusCode(response.Success ? 200 : 500, response);
+        }
+        [HttpPut]
+        [Route("UpdateLeadById")]
+        public async Task<IActionResult> UpdateLeadById([FromBody] Lead model)
+        {
+            var response = await _bulkLeadService.UpdateLeadById(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
     }

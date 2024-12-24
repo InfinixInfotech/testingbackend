@@ -54,6 +54,7 @@ namespace Repository.BulkLead.Class
             foreach (var leadDetail in leadsToUpdate)
             {
                 leadDetail.Lead.EmployeeCode = employeeCode;
+                leadDetail.Lead.AssignedTo = employeeCode;
             }
             var updateDefinition = Builders<_BulkLead>.Update.Set(b => b.Leads, bulkLead.Leads);
 
@@ -79,6 +80,19 @@ namespace Repository.BulkLead.Class
             return leads;
         }
 
+        public async Task<bool> UpdateLeadById(Lead model)
+        {
+            // Filter to find the document containing the specific LeadId in the Leads array
+            var filter = Builders<_BulkLead>.Filter.ElemMatch(b => b.Leads, l => l.Lead.LeadId == model.LeadId);
 
+            // Update the matching Lead object inside the Leads array using the positional operator $
+            var updateDefinition = Builders<_BulkLead>.Update.Set("Leads.$.Lead", model);
+
+            // Perform the update
+            var result = await _collection.UpdateOneAsync(filter, updateDefinition);
+
+            // Return success based on the number of modified documents
+            return result.ModifiedCount > 0;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Models.BulkLeads;
+using Models.Leads;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Repository.BulkLead.IClass
         Task<bool> AddLeadToCampaign(string campaignName, _BulkLead.LeadDetail newLeadDetail);
         Task<List<_BulkLead.LeadDetail>> UpdateTopLeadsByCampaignNameAsync(string campaignName, int customratio, string employeeCode);
         Task<List<_BulkLead.LeadDetail>> GetLeadsByEmployeeCodeAndCampaignAsync(string employeeCode, string campaignName);
+        Task<bool> UpdateLeadById(Lead model);
     }
 }
