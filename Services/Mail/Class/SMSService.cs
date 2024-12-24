@@ -82,11 +82,12 @@ namespace Services.Mail.Class
                     recipientListBCC.AddRange(emailList);
                 }
                 var employeeCodeList = recipientListTo
-           .Concat(recipientListCC)
-           .Concat(recipientListBCC)
-           .Distinct()  
-           .ToList();
-                
+      .Concat(recipientListCC)
+      .Concat(recipientListBCC)
+      .Concat(new[] { sms.From }) 
+      .Distinct()
+      .ToList();
+
                 var email = new Email
                 {
                     Id = _sequenceGenerator.GetNextSequence("submitSMS", "submitSMS_Sequence"),
