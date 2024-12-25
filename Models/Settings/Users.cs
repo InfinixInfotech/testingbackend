@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -83,6 +84,7 @@ public class BankDetails
 public class FetchedLeads
 {
     private string? _createDate;
+    [DefaultValue(null)]
     public string? FetchedDate { get; set; }
     public int? TotalFetchedLeads { get; set; }
 }

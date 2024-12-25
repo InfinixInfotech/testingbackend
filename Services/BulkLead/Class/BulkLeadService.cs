@@ -147,23 +147,8 @@ namespace Services.BulkLead.Class
             int count = 0;
             string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
             var FetchedDate = await _userRepository.GetFetchDateByEmployeeCode(EmployeeCode);
-            int totalFetchedLeads = await _userRepository.GetTotalFetchedLeadsByDateAsync(EmployeeCode, currentDate);
-            if (currentDate == FetchedDate.ToString())
-            {
-                
-                if (result.CustomFetch >= totalFetchedLeads)
-                {
-                    count = result.CustomFetch - totalFetchedLeads;
-                    if (count >= result.CustomRatio) 
-                    {
-                        totalFetchedLeads += result.CustomRatio;
-                        await _userRepository.UpdateTotalFetchedLeadsAsync(EmployeeCode, currentDate, totalFetchedLeads);
-                        var lead = await _bulkLeadRepository.UpdateTopLeadsByCampaignNameAsync(CampaignName, result.CustomRatio, EmployeeCode);
-                        return new Response { Success = true, Data = lead };
-                    }
-                }
-            }
-            else
+            int totalFetchedLeads = await _userRepository.GetTotalFetchedLeadsByDateAsync(EmployeeCode, currentDate);         
+            if(string.IsNullOrEmpty(FetchedDate) || currentDate != FetchedDate.ToString()) 
             {
                 var newFetchedLead = new FetchedLeads
                 {
@@ -187,6 +172,21 @@ namespace Services.BulkLead.Class
                         }
                     }
 
+                }
+            }
+            else if (currentDate == FetchedDate.ToString())
+            {
+
+                if (result.CustomFetch >= totalFetchedLeads)
+                {
+                    count = result.CustomFetch - totalFetchedLeads;
+                    if (count >= result.CustomRatio)
+                    {
+                        totalFetchedLeads += result.CustomRatio;
+                        await _userRepository.UpdateTotalFetchedLeadsAsync(EmployeeCode, currentDate, totalFetchedLeads);
+                        var lead = await _bulkLeadRepository.UpdateTopLeadsByCampaignNameAsync(CampaignName, result.CustomRatio, EmployeeCode);
+                        return new Response { Success = true, Data = lead };
+                    }
                 }
             }
             return new Response { Success = false };
