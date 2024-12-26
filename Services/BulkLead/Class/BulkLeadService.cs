@@ -21,6 +21,7 @@ using Models.Login;
 using MongoDB.Driver;
 using Models.Leads;
 using Repository.Settings.Class;
+using Repository.BulkLead.Class;
 
 
 namespace Services.BulkLead.Class
@@ -217,6 +218,42 @@ namespace Services.BulkLead.Class
                 Message = success ? "Lead updated successfully." : "Failed to update lead."
             };
         }
+
+        public async Task<Response> GetAllCampaignNamesAsync()
+        {
+            try
+            {
+                var campaignNames = await _bulkLeadRepository.GetAllCampaignNamesAsync();
+                if (campaignNames == null || !campaignNames.Any())
+                {
+                    return new Response { Success = false, Error = "No campaigns found." };
+                }
+                return new Response { Success = true, Data = campaignNames, Message = "campaigns name get successfully" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
+
+        public async Task<Response> GetAllLeadsByEmployeeCodeAsync(string employeeCode)
+        {
+            try
+            {
+                var leads = await _bulkLeadRepository.GetAllLeadsByEmployeeCodeAsync(employeeCode);
+                if (leads == null || !leads.Any())
+                {
+                    return new Response { Success = false, Error = "No leads found for the specified employee code." };
+                }
+                return new Response { Success = true, Data = leads };
+            }
+            catch (Exception ex)
+            {
+                return new Response { Success = false, Error = ex.Message };
+            }
+        }
+
+
 
     }
 }

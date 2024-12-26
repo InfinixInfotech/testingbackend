@@ -16,5 +16,7 @@ namespace Repository.BulkLead.IClass
         Task<List<_BulkLead.LeadDetail>> UpdateTopLeadsByCampaignNameAsync(string campaignName, int customratio, string employeeCode);
         Task<List<_BulkLead.LeadDetail>> GetLeadsByEmployeeCodeAndCampaignAsync(string employeeCode, string campaignName);
         Task<bool> UpdateLeadById(Lead model);
+        Task<List<string>> GetAllCampaignNamesAsync();
+        Task<List<_BulkLead.LeadDetail>> GetAllLeadsByEmployeeCodeAsync(string employeeCode);
     }
 }
