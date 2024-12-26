@@ -44,5 +44,6 @@ namespace Repository.Common
         public IMongoCollection<So> So => _database.GetCollection<So>("So");
         public IMongoCollection<Email> Email => _database.GetCollection<Email>("Email");
         public IMongoCollection<_BulkLead> BulkLead => _database.GetCollection<_BulkLead>("BulkLead");
+        public IMongoCollection<Designation> Designation => _database.GetCollection<Designation>("Designation");
     }
 }

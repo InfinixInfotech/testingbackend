@@ -41,6 +41,7 @@ namespace Repository
             services.AddScoped<ISORepository, SORepository>();
             services.AddScoped<ISMSRepository, SMSRepository>();
             services.AddScoped<IBulkLeadRepository, BulkLeadRepository>();
+            services.AddScoped<IDesignationRepository, DesignationRepository>();
 
 
         }

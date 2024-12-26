@@ -42,6 +42,7 @@ namespace Services
             services.AddScoped<ISOService, SOService>();
             services.AddScoped<ISMSService, SMSService>();
             services.AddScoped<IBulkLeadService, BulkLeadService>();
+            services.AddScoped<IDesignationService, DesignationService>();
         }
     }
 }
