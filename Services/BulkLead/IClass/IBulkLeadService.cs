@@ -15,5 +15,7 @@ namespace Services.BulkLead.IClass
         Task<Response> CustomeFetchLeads(string EmployeeCode, string CampaignName);
         Task<Response> GetLeadByEmployeeCode(string employeeCode, string CampaignName);
         Task<Response> UpdateLeadById(Lead model);
+        Task<Response> GetAllCampaignNamesAsync();
+        Task<Response> GetAllLeadsByEmployeeCodeAsync(string employeeCode);
     }
 }

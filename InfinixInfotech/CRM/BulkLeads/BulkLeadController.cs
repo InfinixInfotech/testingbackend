@@ -45,5 +45,36 @@ namespace InfinixInfotech.CRM.BulkLeads
             var response = await _bulkLeadService.UpdateLeadById(model);
             return StatusCode(response.Success ? 200 : 500, response);
         }
+
+        [HttpGet]
+        [Route("GetAllCampaignNames")]
+        public async Task<IActionResult> GetAllCampaignNames()
+        {
+            try
+            {
+                var response = await _bulkLeadService.GetAllCampaignNamesAsync();
+                return StatusCode(response.Success ? 200 : 500, response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllLeadsByEmployeeCode")]
+        public async Task<IActionResult> GetAllLeadsByEmployeeCode(string employeeCode)
+        {
+            try
+            {
+                var response = await _bulkLeadService.GetAllLeadsByEmployeeCodeAsync(employeeCode);
+                return StatusCode(response.Success ? 200 : 500, response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", error = ex.Message });
+            }
+        }
+
     }
 }
