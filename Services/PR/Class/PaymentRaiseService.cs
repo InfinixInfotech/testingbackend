@@ -78,7 +78,7 @@ namespace Services.PR.Class
             {
                
                     await _repository.UpdateLeadPRById(model);
-                    return new Response { Success = true, Message = "=Lead Pr updated successfully" };
+                    return new Response { Success = true, Message = "Lead Pr updated successfully" };
               
                 
             }
