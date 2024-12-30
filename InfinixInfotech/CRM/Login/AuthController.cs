@@ -23,7 +23,7 @@ namespace InfinixInfotech.CRM.Login
             var response = await _authService.LoginAsync(loginData);
             
             HttpContext.Session.SetString("EmployeeCode", response.EmployeeCode);
-            HttpContext.Session.SetString("GroupName", response.GroupName);
+            //HttpContext.Session.SetString("GroupName", response.GroupName);
             if (!response.Success)
                 return Unauthorized(new { message = response.Message });
 

@@ -97,6 +97,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddSwaggerGen(option =>
 {

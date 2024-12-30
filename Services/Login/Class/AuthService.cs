@@ -32,7 +32,7 @@ namespace Services.Login.Class
                 };
             }
             var userDetails = await _userRepository.GetUserDetailsByUsername(loginData.UserName);
-            var getGroupData = await _groupsRepository.GetGroupsByGroupName(userDetails.GroupName);
+           // var getGroupData = await _groupsRepository.GetGroupsByGroupName(userDetails.GroupName);
             var tokenRole = userDetails.FullName == "Admin" ? "admin" : "user";
             var token = await _jwtAcesstoken.GenerateJWT(tokenRole);
             return new AuthResponse
@@ -42,7 +42,7 @@ namespace Services.Login.Class
                 Message = "Login successful.",
                 EmployeeCode = userDetails.EmpCode,
                 GroupName = userDetails.GroupName,
-                Data = getGroupData,
+               // Data = getGroupData,
                 UserName = userDetails.FullName,
             };
         }

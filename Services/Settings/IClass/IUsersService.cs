@@ -10,5 +10,6 @@ namespace Services.Settings.IClass
         Task<Response> GetAllUsers();
         Task<Response> GetUserById(int id);
         Task<Response> GetAllEmployeeCodeAndName();
+        Task<Response> UploadBulkUser(BulkUser user);
     }
 }

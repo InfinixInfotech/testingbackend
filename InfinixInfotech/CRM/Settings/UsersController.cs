@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models.BulkLeads;
 using Models.Settings;
 using Services.Settings.Class;
 using Services.Settings.IClass;
@@ -49,5 +50,12 @@ namespace InfinixInfotech.CRM.Settings
             return StatusCode(response.Success ? 200 : 500, response);
         }
 
+        [HttpPost]
+        [Route("UploadBulkUser")]
+        public async Task<IActionResult> UploadBulkUser([FromForm] BulkUser user)
+        {
+            var response = await _usersService.UploadBulkUser(user);
+            return StatusCode(response.Success ? 200 : 500, response);
+        }
     }
 }

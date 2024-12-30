@@ -1,0 +1,10 @@
+# Ignore bin and obj directories (build output)
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+
+# Ignore any other temporary or unnecessary files
+*.log
+*.tmp
