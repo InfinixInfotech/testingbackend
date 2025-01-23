@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build and Test
-    runs-on: [self-hosted, "MAYANK"]  # Ensure it's running on your self-hosted runner
+    runs-on: [self-hosted, "BACKEND"]  # Ensure it's running on your self-hosted runner
 
     steps:
       - name: Checkout Code
