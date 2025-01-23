@@ -1,19 +1,28 @@
 # Use the official .NET SDK image to build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copy the .csproj and restore dependencies
-COPY InfinixInfotech/InfinixInfotech.csproj ./InfinixInfotech/
+# Copy all project files
+COPY ["InfinixInfotech/InfinixInfotech.csproj", "InfinixInfotech/"]
+COPY ["Models/Models.csproj", "Models/"]
+COPY ["Repository/Repository.csproj", "Repository/"]
+COPY ["Common/Common.csproj", "Common/"]
+COPY ["Services/Services.csproj", "Services/"]
+
+# Restore dependencies
 RUN dotnet restore "InfinixInfotech/InfinixInfotech.csproj"
 
-# Copy the remaining files and publish the application in Release mode
+# Copy the entire solution
 COPY . .
+
+# Publish the application in Release mode
 RUN dotnet publish "InfinixInfotech/InfinixInfotech.csproj" -c Release -o /app/publish
 
 # Use the official .NET runtime image for the final container
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5119
+
 
 # Copy the published app from the build image
 COPY --from=build /app/publish .

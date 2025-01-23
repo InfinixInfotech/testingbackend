@@ -9,18 +9,14 @@ using Services.Common.IClass;
 using System.Text;
 using Common;
 using Models.Common;
-
 var builder = WebApplication.CreateBuilder(args);
-
 // Configure services
 CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
 builder.Services.AddControllers();
-
 // Add scoped services
 builder.Services.AddScoped<JwtAcessToken>();
 builder.Services.AddScoped<SequenceGenerator>();
-
 // Configure MongoDB
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
 builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
@@ -28,14 +24,12 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
     var mongoSettings = serviceProvider.GetRequiredService<IOptions<MongoDBSettings>>().Value;
     return new MongoClient(mongoSettings.ConnectionString);
 });
-
 // Configure JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(jwtKey))
 {
     throw new InvalidOperationException("JWT Key is not configured. Please set it in the configuration.");
 }
-
 var key = Encoding.UTF8.GetBytes(jwtKey);
 builder.Services.AddAuthentication(options =>
 {
@@ -54,27 +48,22 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false, // Set to true if you want to validate the audience
     };
 });
-
 // Configure Authorization
 builder.Services.AddAuthorization(options =>
 {
     // Define the "admin" policy
     options.AddPolicy("admin", policy =>
       policy.RequireRole("admin"));
-
     // Define the "AdminOrUser" policy
     options.AddPolicy("AdminOrUser", policy =>
         policy.RequireAssertion(context =>
             context.User.IsInRole("admin") || context.User.IsInRole("user")));
-
     // Define the "user" policy (to resolve the error)
     options.AddPolicy("user", policy =>
         policy.RequireRole("user"));
 });
-
 // Configure Distributed Cache (Memory Cache)
 builder.Services.AddDistributedMemoryCache();
-
 // Configure Session
 builder.Services.AddSession(options =>
 {
@@ -82,22 +71,18 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;             // Secure session cookie
     options.Cookie.IsEssential = true;          // For GDPR compliance
 });
-
 // Add HTTP Context Accessor
 builder.Services.AddHttpContextAccessor();
-
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
-
-
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddSwaggerGen(option =>
 {
@@ -127,43 +112,33 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-
 // Build the application
 var app = builder.Build();
-
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()|| app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
-
 // Enable session middleware
 app.UseSession(); // Ensure this is before any middleware that depends on session
-
 // Enable CORS
-app.UseCors("AllowSpecificOrigin");
-
+app.UseCors("AllowAll");
 // Enable authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
-
 // Custom middleware to handle unauthorized access
 app.Use(async (context, next) =>
 {
     await next();
-
     if (context.Response.StatusCode == 401) // Unauthorized
     {
         context.Response.ContentType = "application/json";
         await context.Response.WriteAsync("{\"error\": \"Unauthorized access\"}");
     }
 });
-
 // Map controllers to route requests
 app.MapControllers();
-
 // Run the application
 app.Run();
