@@ -1,38 +1,74 @@
-name: CI/CD for .NET Backend
+name: CI/CD Pipeline for .NET Backend
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  build:
+    name: Build and Test
+    runs-on: [self-hosted, "BACKEND"]  # Ensure it's running on your self-hosted runner
 
     steps:
-    # Checkout the repository code
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    # Setup .NET SDK
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0' 
+      # Setup .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
 
-    # Restore dependencies
-    - name: Restore Dependencies
-      run: dotnet restore
+      # Restore dependencies
+      - name: Restore Dependencies
+        run: dotnet restore "InfinixInfotech/InfinixInfotech.csproj"
 
-    # Build the application
-    - name: Build Application
-      run: dotnet build --no-restore --configuration Release
+      # Build the application
+      - name: Build Application
+        run: dotnet build "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-restore
 
-    # Run tests
-    - name: Run Tests
-      run: dotnet test --no-build --verbosity normal
+      # Run Tests
+      - name: Run Tests
+        run: dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build
 
-    
+      # Publish the application for Docker
+      - name: Publish Application
+        run: dotnet publish "InfinixInfotech/InfinixInfotech.csproj" -c Release -o ./publish
+
+  deploy:
+    name: Deploy to Docker
+    needs: build  # Ensure 'deploy' depends on 'build'
+    runs-on: [self-hosted, "BACKEND"]  # Use the self-hosted runner with the "MAYANK" label
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Build Docker image for the backend
+      - name: Build Docker Image
+        run: |
+          # Build the Docker image locally and tag it as 'latest'
+          docker build -t backendmailbox:latest .
+
+      # Stop and remove old Docker container
+      - name: Stop and Remove Old Docker Container
+        run: |
+          # Stop and remove the old container, suppress errors if they occur
+          if (docker ps -q -f "name=backendmailbox") {
+            docker stop backendmailbox
+            docker rm backendmailbox
+          } else {
+            Write-Host "No container named 'backendmailbox' to stop/remove."
+          }
+
+      # Deploy new Docker container
+      - name: Deploy New Docker Container
+        run: |
+          # Run the new container on the appropriate port
+          docker run -d -p 5119:8080 --name backendmailbox backendmailbox:latest
+          # Verify if the container is running
+          docker ps
