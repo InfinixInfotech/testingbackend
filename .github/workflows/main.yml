@@ -42,7 +42,7 @@ jobs:
   deploy:
     name: Deploy to Docker
     needs: build  # Ensure 'deploy' depends on 'build'
-    runs-on: [self-hosted, "MAYANK"]  # Use the self-hosted runner with the "MAYANK" label
+    runs-on: [self-hosted, "BACKEND"]  # Use the self-hosted runner with the "MAYANK" label
 
     steps:
       - name: Checkout Code
