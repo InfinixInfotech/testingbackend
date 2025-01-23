@@ -69,6 +69,6 @@ jobs:
       - name: Deploy New Docker Container
         run: |
           # Run the new container on the appropriate port
-          docker run -d -p 5119:5119 --name backendmailbox backendmailbox:latest
+          docker run -d -p 5119:8080 --name backendmailbox backendmailbox:latest
           # Verify if the container is running
           docker ps
