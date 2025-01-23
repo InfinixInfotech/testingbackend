@@ -58,8 +58,12 @@ jobs:
       - name: Stop and Remove Old Docker Container
         run: |
           # Stop and remove the old container, suppress errors if they occur
-          docker stop backendmailbox || true
-          docker rm backendmailbox || true
+          if (docker ps -q -f "name=backendmailbox") {
+            docker stop backendmailbox
+            docker rm backendmailbox
+          } else {
+            Write-Host "No container named 'backendmailbox' to stop/remove."
+          }
 
       # Deploy new Docker container
       - name: Deploy New Docker Container
