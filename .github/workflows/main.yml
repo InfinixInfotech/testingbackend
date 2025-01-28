@@ -32,9 +32,15 @@ jobs:
         run: |
           dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build --collect:"XPlat Code Coverage"
 
+      - name: Install reportgenerator tool
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+      - name: Add reportgenerator to PATH
+        run: echo "##[add-path]$HOME/.dotnet/tools"
+
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:./TestResults/**/*.xml -targetdir:./coverage -reporttypes:Html
+          reportgenerator -reports:./TestResults/**/*.trx -targetdir:./coverage -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
