@@ -42,7 +42,7 @@ jobs:
 
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:./TestResults/**/*.trx -targetdir:./coverage -reporttypes:Html
+          reportgenerator -reports:./TestResults/commando_MAYANK_2025-01-28_11_30_48/*.trx -targetdir:./coverage -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
