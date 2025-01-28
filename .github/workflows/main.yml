@@ -33,10 +33,10 @@ jobs:
           mkdir -Force "$GITHUB_WORKSPACE/TestResults"
           dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build --collect:"XPlat Code Coverage" --results-directory "$GITHUB_WORKSPACE/TestResults"
 
-      - name: List Test Results
+      - name: List Test Results Directory
         run: |
-          echo "Listing Test Results directory..."
-          dir "$GITHUB_WORKSPACE/TestResults"
+          echo "Listing BackendTests/TestResults directory..."
+          dir "$GITHUB_WORKSPACE/BackendTests/TestResults"
 
       - name: Install reportgenerator tool
         run: dotnet tool install --global dotnet-reportgenerator-globaltool
