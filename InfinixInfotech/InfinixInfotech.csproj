@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <CollectCoverage>true</CollectCoverage>                  <!-- Enable coverage collection -->
+    <CoverletOutputFormat>opencover</CoverletOutputFormat>    <!-- Output format for the coverage -->
   </PropertyGroup>
 
   <ItemGroup>
