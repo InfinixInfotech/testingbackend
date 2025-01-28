@@ -48,7 +48,7 @@ jobs:
 
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:"$GITHUB_WORKSPACE/TestResults/test_results.trx" -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
+          reportgenerator -reports:"$GITHUB_WORKSPACE/BackendTests\TestResults/test_results.trx" -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
