@@ -30,12 +30,13 @@ jobs:
 
       - name: Run Unit Tests with Coverage
         run: |
-          dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build --collect:"XPlat Code Coverage" --results-directory="${{ github.workspace }}/TestResults"
+          mkdir -Force "C:/Users/commando/Desktop/backend_testing CICD/BackendTests/TestResults"
+          dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build --collect:"XPlat Code Coverage" --results-directory="C:/Users/commando/Desktop/backend_testing CICD/BackendTests/TestResults"
 
       - name: List Test Results
         run: |
           echo "Listing Test Results directory..."
-          dir "${{ github.workspace }}/TestResults"
+          dir "C:/Users/commando/Desktop/backend_testing CICD/BackendTests/TestResults"
 
       - name: Install reportgenerator tool
         run: dotnet tool install --global dotnet-reportgenerator-globaltool
@@ -47,13 +48,13 @@ jobs:
 
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:${{ github.workspace }}/TestResults/test_results.trx -targetdir:${{ github.workspace }}/coverage -reporttypes:Html
+          reportgenerator -reports:"C:/Users/commando/Desktop/backend_testing CICD/BackendTests/TestResults/*.trx" -targetdir:"C:/Users/commando/Desktop/backend_testing CICD/BackendTests/coverage" -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
-          path: ./coverage
+          path: "C:/Users/commando/Desktop/backend_testing CICD/BackendTests/coverage"
 
       - name: Run Code Analysis with dotnet-format
         run: dotnet format --check
