@@ -50,7 +50,6 @@ jobs:
         run: |
           reportgenerator -reports:"$GITHUB_WORKSPACE/BackendTests/TestResults/test_results.trx" -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
 
-
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
         with:
@@ -82,4 +81,3 @@ jobs:
 
       - name: Deploy New Docker Container
         run: docker run -d -p 5119:8080 --name backendmailbox backendmailbox:latest
-
