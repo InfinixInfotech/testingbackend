@@ -57,7 +57,7 @@ jobs:
           path: "C:/Users/commando/Desktop/backend_testing CICD/BackendTests/coverage"
 
       - name: Run Code Analysis with dotnet-format
-          run: dotnet format "InfinixInfotech/InfinixInfotech.csproj" --check
+        run: dotnet format "InfinixInfotech/InfinixInfotech.csproj" --check
   
       - name: Publish Application
           run: dotnet publish "InfinixInfotech/InfinixInfotech.csproj" -c Release -o ./publish
