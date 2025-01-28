@@ -48,13 +48,13 @@ jobs:
 
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:"$GITHUB_WORKSPACE/BackendTests/TestResults/test_results.trx" -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
+          reportgenerator -reports:"$GITHUB_WORKSPACE/BackendTests/TestResults/test_results.trx" -targetdir:"$GITHUB_WORKSPACE/BackendTests/TestResults/coverage" -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
-          path: "$GITHUB_WORKSPACE/TestResults/coverage"
+          path: "$GITHUB_WORKSPACE/BackendTests/TestResults/coverage"
 
       - name: Run Code Analysis with dotnet-format
         run: dotnet format "InfinixInfotech/InfinixInfotech.csproj" --check
