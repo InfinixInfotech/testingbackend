@@ -57,21 +57,25 @@ jobs:
         working-directory: InfinixInfotech
 
   deploy:
-    name: Deploy to Docker
-    needs: build
-    runs-on: [self-hosted, "BACKEND"]
+        name: Deploy to Docker
+        needs: build
+        runs-on: [self-hosted, "BACKEND"]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+        steps:
+        - name: Checkout Code
+          uses: actions/checkout@v3
 
-      - name: Build Docker Image
-        run: docker build -t backendmailbox:latest .
+        - name: Build Docker Image
+          run: docker build -t backendmailbox:latest .
 
-      - name: Stop and Remove Old Docker Container (if exists)
-        run: |
-          docker stop backendmailbox || true
-          docker rm backendmailbox || true
+        - name: Stop and Remove Old Docker Container (if exists)
+          run: |
+            if (docker ps -q -f name=backendmailbox) {
+            docker stop backendmailbox
+            docker rm backendmailbox
+            } else {
+            Write-Host 'Docker container backendmailbox does not exist or is already stopped.'
+            }
 
-      - name: Deploy New Docker Container
-        run: docker run -d -p 5119:8080 --name backendmailbox backendmailbox:latest
+        - name: Deploy New Docker Container
+          run: docker run -d -p 5119:8080 --name backendmailbox backendmailbox:latest
