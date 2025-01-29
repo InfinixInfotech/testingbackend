@@ -46,8 +46,9 @@ jobs:
           path: "$GITHUB_WORKSPACE/TestResults"
 
       - name: Run Code Analysis with dotnet-format
-        run: dotnet format InfinixInfotech.csproj --fix
+        run: dotnet format InfinixInfotech.csproj style
         working-directory: InfinixInfotech
+
 
 
 
