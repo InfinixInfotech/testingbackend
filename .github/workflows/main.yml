@@ -23,47 +23,35 @@ jobs:
           dotnet-version: '8.0'
 
       - name: Restore Dependencies
-        run: dotnet restore "InfinixInfotech/InfinixInfotech.csproj"
+        run: dotnet restore
+        working-directory: InfinixInfotech
 
       - name: Build Application
-        run: dotnet build "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
+        working-directory: InfinixInfotech
 
-      - name: Run Unit Tests with Coverage
+      - name: Run Unit Tests
         run: |
           mkdir -Force "$GITHUB_WORKSPACE/TestResults"
-          dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build `
-          --collect:"XPlat Code Coverage" --results-directory "$GITHUB_WORKSPACE/TestResults"
+          dotnet test --configuration Release --no-build --results-directory "$GITHUB_WORKSPACE/TestResults"
+        working-directory: InfinixInfotech
 
       - name: List Test Results Directory
         run: ls -R "$GITHUB_WORKSPACE/TestResults"
 
-      - name: Install reportgenerator tool
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-      - name: Add reportgenerator to PATH
-        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-
-      - name: Generate Test Coverage Report
-        run: |
-          reportgenerator `
-          -reports:"$GITHUB_WORKSPACE/TestResults/**/*.xml" `
-          -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" `
-          -reporttypes:Html
-
-      - name: Upload Coverage Report
+      - name: Upload Test Results
         uses: actions/upload-artifact@v3
         with:
-          name: code-coverage-report
-          path: "$GITHUB_WORKSPACE/TestResults/coverage"
-
-
-
+          name: test-results
+          path: "$GITHUB_WORKSPACE/TestResults"
 
       - name: Run Code Analysis with dotnet-format
-        run: dotnet format "InfinixInfotech/InfinixInfotech.csproj" --check
+        run: dotnet format --check
+        working-directory: InfinixInfotech
 
       - name: Publish Application
-        run: dotnet publish "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --output "$GITHUB_WORKSPACE/publish" --self-contained false
+        run: dotnet publish --configuration Release --output "$GITHUB_WORKSPACE/publish" --self-contained false
+        working-directory: InfinixInfotech
 
   deploy:
     name: Deploy to Docker
@@ -77,7 +65,7 @@ jobs:
       - name: Build Docker Image
         run: docker build -t backendmailbox:latest .
 
-      - name: Stop and Remove Old Docker Container
+      - name: Stop and Remove Old Docker Container (if exists)
         run: |
           docker stop backendmailbox || true
           docker rm backendmailbox || true
