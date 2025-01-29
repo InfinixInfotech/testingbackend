@@ -30,9 +30,10 @@ jobs:
 
       - name: Run Unit Tests with Coverage
         run: |
-          dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build --collect:"XPlat Code Coverage" --results-directory "$GITHUB_WORKSPACE/TestResults"
+          dotnet test "InfinixInfotech/InfinixInfotech.csproj" --configuration Release --no-build \
+            --collect:"XPlat Code Coverage" --results-directory "$GITHUB_WORKSPACE/TestResults"
 
-      - name: Debug Test Results Path
+      - name: Debug Test Results Directory
         run: ls -R "$GITHUB_WORKSPACE/TestResults"
 
       - name: Install ReportGenerator Tool
@@ -42,13 +43,15 @@ jobs:
 
       - name: Generate Test Coverage Report
         run: |
-          reportgenerator -reports:"$GITHUB_WORKSPACE/TestResults/**/coverage.cobertura.xml" -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
+          reportgenerator -reports:"$GITHUB_WORKSPACE/TestResults/**/coverage.cobertura.xml" \
+            -targetdir:"$GITHUB_WORKSPACE/TestResults/coverage" -reporttypes:Html
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
           path: "$GITHUB_WORKSPACE/TestResults/coverage"
+
 
 
       - name: Run Code Analysis with dotnet-format
