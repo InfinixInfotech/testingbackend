@@ -46,8 +46,9 @@ jobs:
           path: "$GITHUB_WORKSPACE/TestResults"
 
       - name: Run Code Analysis with dotnet-format
-        run: dotnet format --check
+        run: dotnet format InfinixInfotech.csproj --check
         working-directory: InfinixInfotech
+
 
       - name: Publish Application
         run: dotnet publish --configuration Release --output "$GITHUB_WORKSPACE/publish" --self-contained false
