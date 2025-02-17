@@ -160,8 +160,6 @@ app.Use(async (context, next) =>
 // Map controllers to route requests
 app.MapControllers();
 
-// Bind to 0.0.0.0 to allow external access
-app.Urls.Add("http://0.0.0.0:5000");
-
+// Bind to 0.0.0.0 to allow external accesess
 // Run the application
 app.Run();
