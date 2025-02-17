@@ -9,14 +9,18 @@ using Services.Common.IClass;
 using System.Text;
 using Common;
 using Models.Common;
+
 var builder = WebApplication.CreateBuilder(args);
+
 // Configure services
 CommonServiceConfig.ConfigureServices(builder.Services);
 CommonConfigRepository.ConfigureServices(builder.Services);
 builder.Services.AddControllers();
+
 // Add scoped services
 builder.Services.AddScoped<JwtAcessToken>();
 builder.Services.AddScoped<SequenceGenerator>();
+
 // Configure MongoDB
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
 builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
@@ -24,6 +28,7 @@ builder.Services.AddSingleton<IMongoClient>(serviceProvider =>
     var mongoSettings = serviceProvider.GetRequiredService<IOptions<MongoDBSettings>>().Value;
     return new MongoClient(mongoSettings.ConnectionString);
 });
+
 // Configure JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(jwtKey))
@@ -48,6 +53,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false, // Set to true if you want to validate the audience
     };
 });
+
 // Configure Authorization
 builder.Services.AddAuthorization(options =>
 {
@@ -62,8 +68,10 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("user", policy =>
         policy.RequireRole("user"));
 });
+
 // Configure Distributed Cache (Memory Cache)
 builder.Services.AddDistributedMemoryCache();
+
 // Configure Session
 builder.Services.AddSession(options =>
 {
@@ -71,8 +79,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;             // Secure session cookie
     options.Cookie.IsEssential = true;          // For GDPR compliance
 });
+
 // Add HTTP Context Accessor
 builder.Services.AddHttpContextAccessor();
+
 // Configure CORS
 builder.Services.AddCors(options =>
 {
@@ -83,6 +93,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
 // Configure Swagger/OpenAPI with JWT support
 builder.Services.AddSwaggerGen(option =>
 {
@@ -112,22 +123,29 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+
 // Build the application
 var app = builder.Build();
+
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment()|| app.Environment.IsProduction())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
+
 // Enable session middleware
 app.UseSession(); // Ensure this is before any middleware that depends on session
+
 // Enable CORS
 app.UseCors("AllowAll");
+
 // Enable authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
+
 // Custom middleware to handle unauthorized access
 app.Use(async (context, next) =>
 {
@@ -138,7 +156,12 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync("{\"error\": \"Unauthorized access\"}");
     }
 });
+
 // Map controllers to route requests
 app.MapControllers();
+
+// Bind to 0.0.0.0 to allow external access
+app.Urls.Add("http://0.0.0.0:5000");
+
 // Run the application
 app.Run();
